@@ -10,6 +10,7 @@
 
 @implementation BadDoctor
 
+
 - (void) patientFeelsBad:(Patient *)patient{
     if (patient.headache && patient.stomache){
         [self makeBadShoot:patient];

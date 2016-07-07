@@ -92,11 +92,11 @@
     for (EMStudent* student in studentArray){
         NSLog(@"student: %@ %@", student.name , student.secondName);
     }
+
     
     // Override point for customization after application launch.
     return YES;
 }
-
 -(void) testMethod: (void (^)(void)) bodyBlock{
     NSLog(@"testMethod calls");
     bodyBlock();
