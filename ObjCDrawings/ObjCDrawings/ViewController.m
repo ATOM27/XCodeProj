@@ -28,7 +28,6 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{ [self.drawing setNeedsDisplay];
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
 }
 
 @end
