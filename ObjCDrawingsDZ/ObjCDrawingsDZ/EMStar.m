@@ -36,6 +36,20 @@
     [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
     [self makeLinesWithContext:context];
     
+    for (NSInteger i = 0; i < 5; i++){
+        
+        CGFloat r = (arc4random() % 20) + 20;
+        CGFloat x = r * sin(0 * theta);
+        CGFloat y = r * cos(0 * theta);
+        
+        NSInteger xCenter =((arc4random() % (NSInteger)CGRectGetWidth(rect)) - x);
+        NSInteger yCenter =((arc4random() % (NSInteger)CGRectGetHeight(rect)) - (y / flip));
+        
+        [self drawLittleStarWithContext:context w:w r:r flip:flip theta:theta xCenter:xCenter yCenter:yCenter rect:rect];
+        [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
+        [self makeLinesWithContext:context];
+    }
+    
     
 }
 
@@ -70,7 +84,7 @@
         CGFloat x = r * sin(k * theta);
         CGFloat y = r * cos(k * theta);
         
-        CGContextSetFillColorWithColor(context, [[self randomColor] CGColor]);
+        CGContextSetFillColorWithColor(context, [[UIColor orangeColor] CGColor]);
         CGContextAddEllipseInRect(context, CGRectMake(x+xCenter - 5, y*flip+yCenter - 5, 10, 10));
         
         NSLog(@"Circle #%ld in center point: %@", (long)k, NSStringFromCGRect(CGRectMake(x+xCenter - 5, y*flip+yCenter - 5, 10, 10)));
@@ -99,7 +113,25 @@
         
         CGContextStrokePath(context);
     }
+    [self.centerPointsOfCercles removeAllObjects];
     //NSLog(@"%@", self.centerPointsOfCercles);
+}
+
+-(void) drawLittleStarWithContext:(CGContextRef) context w:(CGFloat) w r:(CGFloat) r flip:(CGFloat) flip theta:(CGFloat) theta xCenter:(CGFloat) xCenter yCenter:(CGFloat) yCenter rect:(CGRect) rect{
+
+    CGContextSetFillColorWithColor(context, [[self randomColor] CGColor]);
+    
+    CGContextMoveToPoint(context, xCenter, yCenter);
+    
+    for (NSInteger k=0; k<6; k++)
+    {
+        CGFloat x = r * sin(k * theta);
+        CGFloat y = r * cos(k * theta);
+        CGContextAddLineToPoint(context, x+xCenter, y*flip+yCenter);
+        
+    }
+    
+    CGContextFillPath(context);
 }
 
 #pragma mark - Methods
