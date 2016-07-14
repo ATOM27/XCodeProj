@@ -20,37 +20,49 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    self.centerPointsOfCercles = [[NSMutableArray alloc] init];
+    //self.centerPointsOfCercles = [[NSMutableArray alloc] init];
     NSLog(@"Draw rect in: %@", NSStringFromCGRect(rect));
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    NSInteger xCenter = CGRectGetMidX(rect);
-    NSInteger yCenter = CGRectGetMidY(rect);
     
-    CGFloat w = 100.0;
-    CGFloat r = w / 2.0;
-    CGFloat flip = -1.0;
-    CGFloat theta = 2.0 * M_PI * (2.0 / 5.0);
+    // -------Uncommnet if you want draw stars-----------
     
-    [self drawStarWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
-    [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
-    [self makeLinesWithContext:context];
+//    NSInteger xCenter = CGRectGetMidX(rect);
+//    NSInteger yCenter = CGRectGetMidY(rect);
+//    
+//    CGFloat w = 100.0;
+//    CGFloat r = w / 2.0;
+//    CGFloat flip = -1.0;
+//    CGFloat theta = 2.0 * M_PI * (2.0 / 5.0);
+//    
+//    [self drawStarWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
+//    [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
+//    [self makeLinesWithContext:context];
+//    
+//    for (NSInteger i = 0; i < 5; i++){
+//        
+//        CGFloat r = (arc4random() % 20) + 20;
+//        CGFloat x = r * sin(0 * theta);
+//        CGFloat y = r * cos(0 * theta);
+//        
+//        NSInteger xCenter =((arc4random() % (NSInteger)CGRectGetWidth(rect)) - x);
+//        NSInteger yCenter =((arc4random() % (NSInteger)CGRectGetHeight(rect)) - (y / flip));
+//        
+//        [self drawLittleStarWithContext:context w:w r:r flip:flip theta:theta xCenter:xCenter yCenter:yCenter rect:rect];
+//        [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
+//        [self makeLinesWithContext:context];
+//    }
     
-    for (NSInteger i = 0; i < 5; i++){
-        
-        CGFloat r = (arc4random() % 20) + 20;
-        CGFloat x = r * sin(0 * theta);
-        CGFloat y = r * cos(0 * theta);
-        
-        NSInteger xCenter =((arc4random() % (NSInteger)CGRectGetWidth(rect)) - x);
-        NSInteger yCenter =((arc4random() % (NSInteger)CGRectGetHeight(rect)) - (y / flip));
-        
-        [self drawLittleStarWithContext:context w:w r:r flip:flip theta:theta xCenter:xCenter yCenter:yCenter rect:rect];
-        [self drawCirclesWithContext:context xCenter:xCenter yCenter:yCenter w:w r:r flip:flip theta:theta];
-        [self makeLinesWithContext:context];
-    }
+    // ----------drawing app--------
     
-    
+    CGContextSetFillColorWithColor(context, [[UIColor orangeColor] CGColor]);
+    CGContextMoveToPoint(context, self.beginPointDraw.x, self.beginPointDraw.y);
+    //CGFloat finishAngle = M_PI * 2;
+    //CGContextAddArc(context, self.pointDraw.x, self.pointDraw.y, 10, 0, finishAngle, 0);
+    CGContextAddLineToPoint(context, self.pointDraw.x, self.pointDraw.y);
+    //CGContextAddEllipseInRect(context, CGRectMake(self.pointDraw.x - 5, self.pointDraw.y - 5, 10, 10));
+    self.beginPointDraw = self.pointDraw;
+    CGContextFillPath(context);
 }
 
 #pragma mark - Exersises
@@ -68,7 +80,6 @@
         CGFloat x = r * sin(k * theta);
         CGFloat y = r * cos(k * theta);
         CGContextAddLineToPoint(context, x+xCenter, y*flip+yCenter);
-        
     }
     
     CGContextFillPath(context);

@@ -10,4 +10,7 @@
 
 @interface EMStar : UIView
 
+@property (assign, nonatomic) CGPoint pointDraw;
+@property (assign, nonatomic) CGPoint beginPointDraw;
+
 @end

@@ -33,4 +33,27 @@
     [self.drawingView setNeedsDisplay];
 }
 
+#pragma mark - Touches
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch* touch = [touches anyObject];
+    CGPoint pointInDrawingView = [touch locationInView:self.drawingView];
+    self.drawingView.beginPointDraw = pointInDrawingView;
+    //[self.drawingView setNeedsDisplay];
+}
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch* touch = [touches anyObject];
+    CGPoint pointInDrawingView = [touch locationInView:self.drawingView];
+    self.drawingView.pointDraw = pointInDrawingView;
+    [self.drawingView setNeedsDisplay];
+}
+
+-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.drawingView setNeedsDisplay];
+}
+
+
+
+
 @end
