@@ -11,19 +11,28 @@
 @interface EMStar()
 
 @property (strong, nonatomic) NSMutableArray* centerPointsOfCercles;
-
+//@property (assign, nonatomic) CGContextRef context;
+@property (strong, nonatomic) NSMutableArray* points;
 @end
 
 @implementation EMStar
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.points = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     //self.centerPointsOfCercles = [[NSMutableArray alloc] init];
     NSLog(@"Draw rect in: %@", NSStringFromCGRect(rect));
+    //self.points = [[NSMutableArray alloc] init];
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
     
     // -------Uncommnet if you want draw stars-----------
     
@@ -55,14 +64,35 @@
     
     // ----------drawing app--------
     
-    CGContextSetFillColorWithColor(context, [[UIColor orangeColor] CGColor]);
-    CGContextMoveToPoint(context, self.beginPointDraw.x, self.beginPointDraw.y);
-    //CGFloat finishAngle = M_PI * 2;
-    //CGContextAddArc(context, self.pointDraw.x, self.pointDraw.y, 10, 0, finishAngle, 0);
-    CGContextAddLineToPoint(context, self.pointDraw.x, self.pointDraw.y);
-    //CGContextAddEllipseInRect(context, CGRectMake(self.pointDraw.x - 5, self.pointDraw.y - 5, 10, 10));
-    self.beginPointDraw = self.pointDraw;
-    CGContextFillPath(context);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 5.f);
+    CGContextSetStrokeColorWithColor(context, [[UIColor orangeColor] CGColor]);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    
+    CGPoint beginPoint;
+    if ([self.points count] > 0){
+        beginPoint = [[self.points objectAtIndex:0] CGPointValue];
+    }
+    
+    for (int i = 1; i < [self.points count]; i++){
+        if (rect.size.height < beginPoint.x){
+            if (i+1 < [self.points count]){
+                beginPoint = [[self.points objectAtIndex:i+1] CGPointValue];
+                continue;
+            }
+        }
+        CGContextMoveToPoint(context, beginPoint.x, beginPoint.y);
+        CGPoint endPoint = [[self.points objectAtIndex:i] CGPointValue];
+        if (rect.size.height < endPoint.x){
+            beginPoint = endPoint;
+            continue;
+            }
+        
+        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+        beginPoint = endPoint;
+        CGContextStrokePath(context);
+    }
+
 }
 
 #pragma mark - Exersises
@@ -150,5 +180,35 @@
 -(UIColor*) randomColor{
     return [UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.f];
 }
+
+#pragma mark - Touches
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch* touch = [touches anyObject];
+    CGPoint pointInDrawingView = [touch locationInView:self];
+    
+    NSLog(@"Touches began in point: %@", NSStringFromCGPoint(pointInDrawingView));
+    [self.points addObject:[NSValue valueWithCGPoint:pointInDrawingView]]; // begin point
+    //[self.drawingView setNeedsDisplay];
+}
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch* touch = [touches anyObject];
+    CGPoint pointInDrawingView = [touch locationInView:self];
+    [self setNeedsDisplay];
+    
+    NSLog(@"Touches moved in point: %@", NSStringFromCGPoint(pointInDrawingView));
+    [self.points addObject:[NSValue valueWithCGPoint:pointInDrawingView]];
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.points addObject:[NSValue valueWithCGPoint:CGPointMake(1000, 1000)]];
+    [self setNeedsDisplay];
+}
+
+-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self setNeedsDisplay];
+}
+
 
 @end

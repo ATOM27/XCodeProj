@@ -53,7 +53,7 @@
 		D67DACD31D350A1E00A31581 /* ObjCDrawingsDZUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCDrawingsDZUITests.m; sourceTree = "<group>"; };
 		D67DACD51D350A1E00A31581 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D67DACE11D350A5E00A31581 /* EMStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMStar.h; sourceTree = "<group>"; };
-		D67DACE21D350A5E00A31581 /* EMStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMStar.m; sourceTree = "<group>"; };
+		D67DACE21D350A5E00A31581 /* EMStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMStar.m; sourceTree = "<group>"; wrapsLines = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +507,7 @@
 				D67DACDA1D350A1E00A31581 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D67DACDB1D350A1E00A31581 /* Build configuration list for PBXNativeTarget "ObjCDrawingsDZTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +516,7 @@
 				D67DACDD1D350A1E00A31581 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D67DACDE1D350A1E00A31581 /* Build configuration list for PBXNativeTarget "ObjCDrawingsDZUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +525,7 @@
 				D67DACE01D350A1E00A31581 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[EMStar drawRect:]:EMStar.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EMStar touchesBegan:withEvent:]:EMStar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.points">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[EMStar makeLinesWithContext:]:EMStar.m">
          <PersistentStrings>
             <PersistentString
