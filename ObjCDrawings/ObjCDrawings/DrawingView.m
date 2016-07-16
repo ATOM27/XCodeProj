@@ -14,7 +14,6 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    
     NSLog(@"Draw rect in: %@", NSStringFromCGRect(rect));
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -35,7 +34,6 @@
     CGContextStrokePath(context);
     
     CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
-    
     CGContextAddEllipseInRect(context, square1);
     CGContextAddEllipseInRect(context, square2);
     CGContextAddEllipseInRect(context, square3);

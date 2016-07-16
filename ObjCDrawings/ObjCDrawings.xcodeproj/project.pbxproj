@@ -207,6 +207,7 @@
 		D6A1DABA1D2DA293003F11CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = EM;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Eugene Mekhedov";
 				TargetAttributes = {
@@ -507,6 +508,7 @@
 				D6A1DAF11D2DA293003F11CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6A1DAF21D2DA293003F11CF /* Build configuration list for PBXNativeTarget "ObjCDrawingsTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +517,7 @@
 				D6A1DAF41D2DA293003F11CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6A1DAF51D2DA293003F11CF /* Build configuration list for PBXNativeTarget "ObjCDrawingsUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +526,7 @@
 				D6A1DAF71D2DA293003F11CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
