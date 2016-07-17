@@ -10,6 +10,10 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *indicatorLabel;
+
+
+- (IBAction)actionButtonOnStoryboard:(UIButton *)sender forEvent:(UIEvent *)event;
 
 @end
 
