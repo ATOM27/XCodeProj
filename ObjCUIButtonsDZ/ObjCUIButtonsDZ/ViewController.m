@@ -25,6 +25,14 @@
         [currentButton.layer setBorderColor:[[UIColor grayColor] CGColor]];
     }
     self.checkerForLabel = TRUE;
+    
+    
+    // PLAY WITH BLUR
+//    UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+//    UIVisualEffectView* blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//    blurEffectView.frame = self.view.bounds;
+//    [self.view addSubview:blurEffectView];
+//    [self.view sendSubviewToBack:blurEffectView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +50,12 @@
         self.indicatorLabel.text = [NSString stringWithFormat:@"%.0f", result];
     }
     self.firstArgument = [NSNumber numberWithFloat:result];
+}
+
+#pragma mark - Color
+
+-(UIColor*) randomColor{
+    return [UIColor colorWithHue:( arc4random() % 256 / 256.0 ) saturation:((arc4random() % 128 / 256.0 ) + 0.5) brightness:( (arc4random() % 128 / 256.0 ) + 0.5) alpha:1.f];
 }
 
 #pragma mark - Actions
