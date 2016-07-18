@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, EMOperation){
 @property (weak, nonatomic) IBOutlet UILabel *indicatorLabel;
 @property (assign, nonatomic) EMOperation operationSign;
 @property (strong, nonatomic) NSNumber* firstArgument;
-@property (assign, nonatomic) NSInteger secondArgument;
+@property (assign, nonatomic) CGFloat secondArgument;
 
 - (IBAction)actionTouch:(UIButton *)sender forEvent:(UIEvent *)event;
 
@@ -32,5 +32,7 @@ typedef NS_ENUM(NSInteger, EMOperation){
 - (IBAction)actionOperations:(UIButton *)sender forEvent:(UIEvent *)event;
 
 - (IBAction)actionResult:(UIButton *)sender forEvent:(UIEvent *)event;
+
+- (IBAction)actionDot:(UIButton *)sender forEvent:(UIEvent *)event;
 @end
 

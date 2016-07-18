@@ -53,6 +53,7 @@
         self.checkerForLabel = FALSE;
     }
     self.indicatorLabel.text = [self.indicatorLabel.text stringByAppendingString:sender.titleLabel.text];
+    NSLog(@"%.5f", [self.indicatorLabel.text floatValue]);
 }
 
 - (IBAction)actionClearLabel:(id)sender forEvent:(UIEvent *)event {
@@ -98,5 +99,22 @@
         default:
             break;
     }
+}
+
+- (IBAction)actionDot:(UIButton *)sender forEvent:(UIEvent *)event {
+    
+    if([self.indicatorLabel.text isEqual:@"0"]){
+        self.indicatorLabel.text = @"0.";
+        self.checkerForLabel = FALSE;
+    }
+    else{
+        self.indicatorLabel.text = [self.indicatorLabel.text stringByAppendingString:@"."];
+    }
+}
+
+#pragma mark - Orientation
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
 }
 @end
