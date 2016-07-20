@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, EMTypeOfBall){
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.speedOfAnimation = self.infoSlider.value;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +36,7 @@ typedef NS_ENUM(NSInteger, EMTypeOfBall){
 
 -(void) makeRotationWithImageView:(UIImageView*) imageView onAngle:(CGFloat) angle{
     
-    [UIView animateWithDuration:3
+    [UIView animateWithDuration:3 * self.speedOfAnimation
                           delay:0
                         options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSInteger, EMTypeOfBall){
 
 -(void) makeScaleWithImageView:(UIImageView*) imageView sx:(CGFloat) sx sy:(CGFloat) sy{
     
-    [UIView animateWithDuration:3
+    [UIView animateWithDuration:3 * self.speedOfAnimation
                           delay:0
                         options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
@@ -68,6 +70,27 @@ typedef NS_ENUM(NSInteger, EMTypeOfBall){
     
 }
 
+-(void) makeTranslationWithImageView:(UIImageView*) imageView{
+    
+    CGPoint pointToMove = CGPointMake(arc4random() % (NSInteger)CGRectGetMaxX(self.parentToImageView.bounds),
+                                      arc4random() % (NSInteger)CGRectGetMaxY(self.parentToImageView.bounds));
+
+
+    [UIView animateWithDuration:3 * self.speedOfAnimation
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         imageView.center = pointToMove;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         if (self.translationSwitch.isOn){
+                             __weak UIImageView* weakImageView = imageView;
+                             [self makeTranslationWithImageView:weakImageView];
+                         }
+                     }];
+    
+}
 #pragma mark - Actions
 
 - (IBAction)actionChangeBall:(UISegmentedControl *)sender {
@@ -109,5 +132,12 @@ typedef NS_ENUM(NSInteger, EMTypeOfBall){
 }
 
 - (IBAction)actionMakeTranslation:(UISwitch *)sender {
+    if (sender.isOn){
+        [self makeTranslationWithImageView:self.ballImageView];
+    }
+}
+
+- (IBAction)actionSpeedChange:(UISlider *)sender {
+    self.speedOfAnimation = sender.value;
 }
 @end

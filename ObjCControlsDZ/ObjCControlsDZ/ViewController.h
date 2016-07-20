@@ -14,11 +14,14 @@
 @property (weak, nonatomic) IBOutlet UISwitch *translationSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *infoSlider;
 @property (weak, nonatomic) IBOutlet UIImageView *ballImageView;
+@property (weak, nonatomic) IBOutlet UIView *parentToImageView;
+@property (assign, nonatomic) CGFloat speedOfAnimation;
 
 - (IBAction)actionChangeBall:(UISegmentedControl *)sender;
 - (IBAction)actionMakeRotation:(UISwitch *)sender;
 - (IBAction)actionMakeScale:(UISwitch *)sender;
 - (IBAction)actionMakeTranslation:(UISwitch *)sender;
+- (IBAction)actionSpeedChange:(id)sender;
 
 
 @end
