@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *secondNameField;
 
+- (IBAction)actionTextChanged:(UITextField *)sender;
 
 @end
-
+ 

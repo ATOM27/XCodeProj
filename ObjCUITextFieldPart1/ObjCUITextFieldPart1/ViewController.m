@@ -25,4 +25,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)actionTextChanged:(UITextField *)sender {
+    NSLog(@"%@", sender.text);
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if ([textField isEqual:self.firstNameField]){
+        [self.secondNameField becomeFirstResponder];
+    }
+    else{
+        [textField resignFirstResponder];
+    }
+    
+    return true;
+}
+
 @end
