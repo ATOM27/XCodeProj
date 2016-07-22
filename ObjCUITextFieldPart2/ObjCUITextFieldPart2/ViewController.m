@@ -32,7 +32,17 @@
     NSLog(@"shouldChangeCharactersInRange %@", NSStringFromRange(range));
     NSLog(@"replacementString = %@", string);
     
-    return true;
+    NSString* resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    NSLog(@"new string = %@", resultString);
+    
+    NSCharacterSet* set = [NSCharacterSet characterSetWithCharactersInString:@" ,"];// if you want to create own separators
+    NSCharacterSet* digitsOnly = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];//inverted set means - all not including decimalDigitCharacterSet
+    
+    NSArray* words = [resultString componentsSeparatedByCharactersInSet:set];
+    NSLog(@"words = %@", words);
+    
+    return resultString.length <=10;
 }
 
 @end
