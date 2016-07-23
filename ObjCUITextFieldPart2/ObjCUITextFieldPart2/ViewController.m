@@ -28,19 +28,32 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    NSLog(@"textField text = %@", textField.text);
-    NSLog(@"shouldChangeCharactersInRange %@", NSStringFromRange(range));
-    NSLog(@"replacementString = %@", string);
+//    NSLog(@"textField text = %@", textField.text);
+//    NSLog(@"shouldChangeCharactersInRange %@", NSStringFromRange(range));
+//    NSLog(@"replacementString = %@", string);
+ 
+    NSString* newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    NSString* resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSCharacterSet* digitsSetInverted = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSArray* components = [string componentsSeparatedByCharactersInSet:digitsSetInverted];
     
-    NSLog(@"new string = %@", resultString);
     
-    NSCharacterSet* set = [NSCharacterSet characterSetWithCharactersInString:@" ,"];// if you want to create own separators
-    NSCharacterSet* digitsOnly = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];//inverted set means - all not including decimalDigitCharacterSet
+    if ([components count] > 1){
+        return FALSE;
+    }
+    NSLog(@"new string = %@", newString);
     
-    NSArray* words = [resultString componentsSeparatedByCharactersInSet:set];
-    NSLog(@"words = %@", words);
+    NSMutableString* resultString = [[NSMutableString alloc] init];
+    
+    static const int localNumberMaxLenght = 7;
+    static const int areaCodeMaxLenght = 3;
+    static const int countryCodeMaxLenght = 3;
+    
+//    NSCharacterSet* set = [NSCharacterSet characterSetWithCharactersInString:@" ,"];// if you want to create own separators
+//    NSCharacterSet* digitsOnly = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];//inverted set means - all not including decimalDigitCharacterSet
+//    
+//    NSArray* words = [resultString componentsSeparatedByCharactersInSet:set];
+//    NSLog(@"words = %@", words);
     
     return resultString.length <=10;
 }
