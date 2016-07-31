@@ -13,11 +13,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="contentInset" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection headerTitle="Account info" id="ucE-Ls-gbX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AAD-bv-KpX">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="48" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AAD-bv-KpX" id="kIa-jK-Cdb">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -28,6 +30,10 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="actionTextChanged:" destination="oM4-Vc-rFk" eventType="editingChanged" id="p0S-Zg-ITe"/>
+                                                        <outlet property="delegate" destination="oM4-Vc-rFk" id="SNh-Tg-2bs"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XNM-EO-JPn">
                                                     <rect key="frame" x="8" y="-1" width="81" height="43.5"/>
@@ -40,7 +46,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bzo-UW-xMH">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bzo-UW-xMH" id="8YN-ew-tCS">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -50,7 +56,11 @@
                                                     <rect key="frame" x="162" y="0.0" width="150" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="actionTextChanged:" destination="oM4-Vc-rFk" eventType="editingDidEnd" id="6gQ-s6-vd1"/>
+                                                        <outlet property="delegate" destination="oM4-Vc-rFk" id="vSU-CE-pP8"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P23-xb-fKq">
                                                     <rect key="frame" x="8" y="-1" width="130" height="43.5"/>
@@ -67,7 +77,7 @@
                             <tableViewSection headerTitle="Game Play" id="MqS-2W-ktL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hrt-cG-Z33">
-                                        <rect key="frame" x="0.0" y="144" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="164" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hrt-cG-Z33" id="1sR-gH-qlC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -81,6 +91,9 @@
                                                         <segment title="Normal"/>
                                                         <segment title="Hard"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="actionValueChanged:" destination="oM4-Vc-rFk" eventType="valueChanged" id="pgR-92-lD1"/>
+                                                    </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MN2-aQ-lHs">
                                                     <rect key="frame" x="8" y="-2" width="81" height="43.5"/>
@@ -97,7 +110,7 @@
                             <tableViewSection headerTitle="Graphics" id="lMg-v3-76r">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="kbB-3V-hDf">
-                                        <rect key="frame" x="0.0" y="216" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="236" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbB-3V-hDf" id="yRs-IM-VFi">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -106,6 +119,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aeZ-ec-vEI">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="actionValueChanged:" destination="oM4-Vc-rFk" eventType="valueChanged" id="MEg-7f-ESY"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shadows" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wPh-s8-fHW">
                                                     <rect key="frame" x="8" y="-1" width="81" height="43.5"/>
@@ -118,7 +134,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Zwc-pu-pQe">
-                                        <rect key="frame" x="0.0" y="260" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="280" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zwc-pu-pQe" id="Gvo-DE-mXy">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -131,6 +147,9 @@
                                                         <segment title="High"/>
                                                         <segment title="Low"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="actionValueChanged:" destination="oM4-Vc-rFk" eventType="valueChanged" id="C2a-yT-EkD"/>
+                                                    </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Iw-iT-IV2">
                                                     <rect key="frame" x="8" y="-2" width="102" height="43.5"/>
@@ -147,7 +166,7 @@
                             <tableViewSection headerTitle="Volume" id="q6d-Pv-d4J">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="7Wp-RI-iXM">
-                                        <rect key="frame" x="0.0" y="332" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="352" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Wp-RI-iXM" id="pIt-Sr-A7C">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
@@ -163,12 +182,15 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="ejB-kz-Xbh">
                                                     <rect key="frame" x="6" y="36" width="308" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="actionValueChanged:" destination="oM4-Vc-rFk" eventType="valueChanged" id="GRK-Bd-Na6"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="LFM-or-bCf">
-                                        <rect key="frame" x="0.0" y="412" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="432" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFM-or-bCf" id="gfY-Yc-5DU">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
@@ -184,6 +206,9 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="vqM-VT-JaG">
                                                     <rect key="frame" x="6" y="36" width="308" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="actionValueChanged:" destination="oM4-Vc-rFk" eventType="valueChanged" id="5eE-c0-YLz"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -197,6 +222,15 @@
                         </connections>
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="detalizationSegmentedControl" destination="nFc-cw-P3I" id="Sjj-oP-lLM"/>
+                        <outlet property="levelSegmentedControl" destination="NE4-mt-FV0" id="dYj-Ym-9Rd"/>
+                        <outlet property="loginTextField" destination="aVZ-OQ-KOB" id="le5-LU-SJm"/>
+                        <outlet property="musicSlider" destination="vqM-VT-JaG" id="wjO-gJ-6ck"/>
+                        <outlet property="passwordTextField" destination="iEx-M2-zT5" id="Ybe-cF-vpF"/>
+                        <outlet property="shadowSwitch" destination="aeZ-ec-vEI" id="cXj-ds-nCm"/>
+                        <outlet property="soundSlider" destination="ejB-kz-Xbh" id="4bh-MK-98a"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuG-wB-XXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
