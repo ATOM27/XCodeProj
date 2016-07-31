@@ -1,38 +1,71 @@
 //
-//  ViewController.m
+//  EMTableViewController.m
 //  ObjCUITextFieldDZ
 //
-//  Created by Eugene Mekhedov on 27.07.16.
+//  Created by Eugene Mekhedov on 31.07.16.
 //  Copyright © 2016 Eugene Mekhedov. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "EMTableViewController.h"
 
-typedef NS_ENUM (NSInteger, EMTextFieldType){
+static NSString* kSettingsName = @"name";
+static NSString* kSettingsSecondName = @"secondName";
+static NSString* kSettingsLogin = @"login";
+static NSString* kSettingsPassword = @"password";
+static NSString* kSettingsPhone = @"phone";
+static NSString* kSettingsEmail = @"email";
+
+typedef NS_ENUM(NSInteger, EMTextFieldType){
     EMTextFieldTypeName,
-    EMTextFieldTypeSurname,
+    EMTextFieldTypeSecondName,
     EMTextFieldTypeLogin,
     EMTextFieldTypePassword,
-    EMTextFieldTypeAge,
     EMTextFieldTypePhone,
     EMTextFieldTypeEmail
 };
 
-@interface ViewController ()
+@interface EMTableViewController ()
 
 @end
 
-@implementation ViewController
+@implementation EMTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self loadSettings];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Save and Load
+
+-(void) loadSettings {
+    NSUserDefaults* userDafaults = [NSUserDefaults standardUserDefaults];
     
+    self.nameTextField.text = [userDafaults objectForKey:kSettingsName];
+    self.secondNameTextField.text = [userDafaults objectForKey:kSettingsSecondName];
+    self.loginTextField.text = [userDafaults objectForKey:kSettingsLogin];
+    self.passwordTextField.text = [userDafaults objectForKey:kSettingsPassword];
+    self.phoneTextField.text = [userDafaults objectForKey:kSettingsPhone];
+    self.emailTextField.text = [userDafaults objectForKey:kSettingsEmail];
+}
+
+-(void) saveSettings {
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:self.nameTextField.text forKey:kSettingsName];
+    [userDefaults setObject:self.secondNameTextField.text forKey:kSettingsSecondName];
+    [userDefaults setObject:self.loginTextField.text forKey:kSettingsLogin];
+    [userDefaults setObject:self.passwordTextField.text forKey:kSettingsPassword];
+    [userDefaults setObject:self.phoneTextField.text forKey:kSettingsPhone];
+    [userDefaults setObject:self.emailTextField.text forKey:kSettingsEmail];
+    
+    [userDefaults synchronize];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -40,19 +73,15 @@ typedef NS_ENUM (NSInteger, EMTextFieldType){
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField.tag < EMTextFieldTypeEmail){
         [[self.textFieldCollection objectAtIndex:textField.tag+1] becomeFirstResponder];
-    }
-    else{
+    }else{
         [textField resignFirstResponder];
     }
-    
-return TRUE;
+    return TRUE;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     NSString* newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    UILabel* hidingLabel = [self.hidingLabelCollection objectAtIndex:textField.tag];
-    hidingLabel.text = newString;
     
     if (textField.tag == EMTextFieldTypeEmail){
         NSCharacterSet* wrongCharacters = [NSCharacterSet characterSetWithCharactersInString:@"~!#$%^&*()_+\"№;%:?*\\/|\'"];
@@ -64,7 +93,7 @@ return TRUE;
         if ([emailArray count] > 2){
             return FALSE;
         }
-            
+        
     }
     
     if (textField.tag == EMTextFieldTypePhone){
@@ -128,12 +157,9 @@ return TRUE;
     }
 }
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField{
-    
-    UILabel* hidingLabel = [self.hidingLabelCollection objectAtIndex:textField.tag];
-    hidingLabel.text = @"";
-    
-    return TRUE;
-}
+#pragma mark - Actions
 
+- (IBAction)actionTextFieldChanged:(UITextField *)sender {
+    [self saveSettings];
+}
 @end
