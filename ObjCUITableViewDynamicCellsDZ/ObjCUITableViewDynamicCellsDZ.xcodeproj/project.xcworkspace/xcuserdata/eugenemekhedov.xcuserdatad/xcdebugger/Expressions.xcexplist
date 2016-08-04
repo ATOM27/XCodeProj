@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ViewController tableView:cellForRowAtIndexPath:]:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController tableView:numberOfRowsInSection:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[[self.sectionOfStudents objectAtIndex:section] arrayOfStudentsInSection] count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

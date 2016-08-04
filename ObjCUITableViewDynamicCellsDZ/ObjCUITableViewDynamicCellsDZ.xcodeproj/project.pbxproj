@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D604D8D51D53935E00BCE3CE /* EMSections.m in Sources */ = {isa = PBXBuildFile; fileRef = D604D8D41D53935E00BCE3CE /* EMSections.m */; };
 		D64230871D50A99600B5883C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D64230861D50A99600B5883C /* main.m */; };
 		D642308A1D50A99600B5883C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D64230891D50A99600B5883C /* AppDelegate.m */; };
 		D642308D1D50A99600B5883C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D642308C1D50A99600B5883C /* ViewController.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D604D8D31D53935E00BCE3CE /* EMSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMSections.h; sourceTree = "<group>"; };
+		D604D8D41D53935E00BCE3CE /* EMSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMSections.m; sourceTree = "<group>"; };
 		D64230821D50A99600B5883C /* ObjCUITableViewDynamicCellsDZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCUITableViewDynamicCellsDZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D64230861D50A99600B5883C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D64230881D50A99600B5883C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 			children = (
 				D64230C31D50D4F700B5883C /* Student.h */,
 				D64230C41D50D4F700B5883C /* Student.m */,
+				D604D8D31D53935E00BCE3CE /* EMSections.h */,
+				D604D8D41D53935E00BCE3CE /* EMSections.m */,
 			);
 			name = Students;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				D64230C51D50D4F700B5883C /* Student.m in Sources */,
 				D64230BD1D50C54300B5883C /* Custom.m in Sources */,
 				D64230871D50A99600B5883C /* main.m in Sources */,
+				D604D8D51D53935E00BCE3CE /* EMSections.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +533,7 @@
 				D64230B11D50A99600B5883C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D64230B21D50A99600B5883C /* Build configuration list for PBXNativeTarget "ObjCUITableViewDynamicCellsDZTests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +542,7 @@
 				D64230B41D50A99600B5883C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D64230B51D50A99600B5883C /* Build configuration list for PBXNativeTarget "ObjCUITableViewDynamicCellsDZUITests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +551,7 @@
 				D64230B71D50A99600B5883C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

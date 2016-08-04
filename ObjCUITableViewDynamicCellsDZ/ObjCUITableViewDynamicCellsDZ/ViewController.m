@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Custom.h"
 #import "Student.h"
+#import "EMSections.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,8 @@
 @property (assign, nonatomic) CGFloat blueComponent;
 
 @property (strong, nonatomic) NSMutableArray* arrayOfStudents;
+@property (strong, nonatomic) NSMutableDictionary* sectionOfStudents;
+@property (strong, nonatomic) NSArray* nameOfSections;
 
 @property (strong, nonatomic) NSMutableArray* arrayOfCustoms;
 
@@ -44,6 +47,8 @@
 //    }
     
     self.arrayOfStudents = [[NSMutableArray alloc] init];
+    self.sectionOfStudents = [[NSMutableDictionary alloc] init];
+    self.nameOfSections = [[NSArray alloc] initWithObjects:@"Excellent students", @"Good students", @"Bad students", @"Very bad students", nil];
     
     for (int i =0; i < 30; i++){
         Student* newStudent = [[Student alloc] initWithRandoom];
@@ -84,8 +89,64 @@
 
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [self.nameOfSections count];
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+
+    return [self.nameOfSections objectAtIndex:section];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.arrayOfStudents count];
+    
+    EMSections* sec = [[EMSections alloc] init];
+    
+    switch (section) {
+        case 0:
+            for (Student* student in self.arrayOfStudents){
+                if (student.averageMark >= 10){
+                    [sec.arrayOfStudentsInSection addObject:student];
+                }
+            }
+            break;
+        case 1:
+            for (Student* student in self.arrayOfStudents){
+                if (student.averageMark >= 7 && student.averageMark < 10){
+                    [sec.arrayOfStudentsInSection addObject:student];
+                }
+            }
+            break;
+        case 2:
+            for (Student* student in self.arrayOfStudents){
+                if (student.averageMark >= 4 && student.averageMark < 7){
+                    [sec.arrayOfStudentsInSection addObject:student];
+                }
+            }
+            break;
+        case 3:
+            for (Student* student in self.arrayOfStudents){
+                if (student.averageMark >= 1 && student.averageMark < 3){
+                    [sec.arrayOfStudentsInSection addObject:student];
+                }
+            }
+            break;
+        default:
+            break;
+    }
+    
+    [sec.arrayOfStudentsInSection sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if ([[obj1 name] compare:[obj2 name]] == NSOrderedSame){
+            return [[obj1 secondName] compare:[obj2 secondName]];
+        }else{
+            return [[obj1 name] compare:[obj2 name]];
+        }
+    }];
+    
+    [self.sectionOfStudents setObject:sec forKey:[NSNumber numberWithLong:section]];
+    sec = [self.sectionOfStudents objectForKey:[NSNumber numberWithLong:section]];
+    return [sec.arrayOfStudentsInSection count];
+    //return [self.arrayOfStudents count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -96,21 +157,31 @@
     
     if (!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-        cell.backgroundColor = [[self.arrayOfCustoms objectAtIndex:indexPath.row] color];
+        //cell.backgroundColor = [[self.arrayOfCustoms objectAtIndex:indexPath.row] color];
         NSLog(@"cell created");
-    }else{
-        cell.backgroundColor = [[self.arrayOfCustoms objectAtIndex:indexPath.row] color];
-    }
+    }//else{
+        //cell.backgroundColor = [[self.arrayOfCustoms objectAtIndex:indexPath.row] color];
+    //}
     
-    [self.arrayOfStudents sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        if ([[obj1 name] compare:[obj2 name]] == NSOrderedSame){
-            return [[obj1 secondName] compare:[obj2 secondName]];
-        }else{
-            return [[obj1 name] compare:[obj2 name]];
-        }
-    }];
+//    [self.arrayOfStudents sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        if ([[obj1 name] compare:[obj2 name]] == NSOrderedSame){
+//            return [[obj1 secondName] compare:[obj2 secondName]];
+//        }else{
+//            return [[obj1 name] compare:[obj2 name]];
+//        }
+//    }];
     
-    Student* selectedStudent = [self.arrayOfStudents objectAtIndex:indexPath.row];
+//    [self.arrayOfStudentsInSection sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        if ([[obj1 name] compare:[obj2 name]] == NSOrderedSame){
+//            return [[obj1 secondName] compare:[obj2 secondName]];
+//        }else{
+//            return [[obj1 name] compare:[obj2 name]];
+//        }
+//    }];
+    
+    EMSections* sec = [self.sectionOfStudents objectForKey:[NSNumber numberWithLong:indexPath.section]];
+    Student* selectedStudent = [sec.arrayOfStudentsInSection objectAtIndex:indexPath.row]; //[self.arrayOfStudents objectAtIndex:indexPath.row];
+    
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", selectedStudent.name, selectedStudent.secondName];
     cell.textLabel.textColor = [self getColorDependOfAverageMarkOnStudent:selectedStudent];
