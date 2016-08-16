@@ -30,7 +30,8 @@
     
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.editing = TRUE;
+    
+    self.tableView = tableView;
 }
 
 - (void)viewDidLoad {
@@ -56,6 +57,20 @@
     }
     
     [self.tableView reloadData];
+    
+    self.navigationItem.title = @"Students";
+    
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                target:self
+                                                                                action:@selector(actionEdit:)];
+    
+    self.navigationItem.rightBarButtonItem = editButton;
+    
+    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(actionAddSection:)];
+    
+    self.navigationItem.leftBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,6 +78,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Actions
+
+-(void) actionEdit:(UIBarButtonItem*) sender {
+    
+    BOOL isEditing = self.tableView.editing;
+    
+    [self.tableView setEditing:!isEditing animated:TRUE];
+    
+    UIBarButtonSystemItem item = UIBarButtonSystemItemDone;
+    
+    if (isEditing){
+        item = UIBarButtonSystemItemEdit;
+    }
+    
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:item
+                                                                                target:self
+                                                                                action:@selector(actionEdit:)];
+    
+    [self.navigationItem setRightBarButtonItem:editButton animated:TRUE];
+}
+
+-(void) actionAddSection:(UIBarButtonItem*) sender {
+    
+    EMGroup* group = [[EMGroup alloc] init];
+    group.name = [NSString stringWithFormat:@"Group #%ld", ([self.groupsArray count]+1)];
+    group.studentsArray = @[[EMStudent randomStudent], [EMStudent randomStudent]];
+    
+    NSInteger newSectionIndex = 0;
+    [self.groupsArray insertObject:group atIndex:newSectionIndex];
+    
+    [self.tableView beginUpdates];
+    
+    
+        NSIndexSet* insertSection = [NSIndexSet indexSetWithIndex:newSectionIndex];
+    
+        [self.tableView insertSections:insertSection withRowAnimation:[self.groupsArray count] % 2 ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    
+    
+    [self.tableView endUpdates];
+    
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if ([[UIApplication sharedApplication] isIgnoringInteractionEvents]){
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        }
+    });
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -144,6 +208,10 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    return FALSE;
 }
 
 @end
