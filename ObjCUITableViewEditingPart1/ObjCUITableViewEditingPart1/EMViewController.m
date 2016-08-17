@@ -223,10 +223,49 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        
+        EMGroup* group = [self.groupsArray objectAtIndex:indexPath.section];
+        NSMutableArray* tempStudentArray = [NSMutableArray arrayWithArray:group.studentsArray];
+        [tempStudentArray removeObjectAtIndex:indexPath.row];
+        
+        group.studentsArray = tempStudentArray;
+        
+        
+        
+        [self.tableView beginUpdates];
+        
+        
+        NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[newIndexPath] withRowAnimation:YES];
+        
+        
+        [self.tableView endUpdates];
+        
+        
+        
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([[UIApplication sharedApplication] isIgnoringInteractionEvents]){
+                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            }
+        });
+
+    }
+}
+
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellEditingStyleNone;
+    return indexPath.row == [[[self.groupsArray objectAtIndex:indexPath.section] studentsArray] count] ? UITableViewCellEditingStyleNone : UITableViewCellEditingStyleDelete;
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Remove";
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -268,23 +307,16 @@
         [self.tableView beginUpdates];
         
         
-            NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:  inSection:<#(NSInteger)#>]
+                NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:[[[self.groupsArray objectAtIndex:indexPath.section] studentsArray] count]-1 inSection:indexPath.section];
         
-            [self.tableView insertRowsAtIndexPaths:<#(nonnull NSArray<NSIndexPath *> *)#> withRowAnimation:<#(UITableViewRowAnimation)#>];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath ] withRowAnimation:UITableViewRowAnimationFade];
         
         
         [self.tableView endUpdates];
-        
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            if ([[UIApplication sharedApplication] isIgnoringInteractionEvents]){
-                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            }
-        });
 
     }
 }
+
+
 
 @end
