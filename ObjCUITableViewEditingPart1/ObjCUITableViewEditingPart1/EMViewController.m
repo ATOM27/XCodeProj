@@ -31,6 +31,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     
+    tableView.allowsSelectionDuringEditing = NO;
     self.tableView = tableView;
 }
 
@@ -141,42 +142,58 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[[self.groupsArray objectAtIndex: section] studentsArray] count];
+    return [[[self.groupsArray objectAtIndex: section] studentsArray] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString* identifier = @"Cell";
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    if (indexPath.row == [[[self.groupsArray objectAtIndex:indexPath.section] studentsArray] count]){
+        
+        static NSString* addStudentIdentifier = @"AddStudentCell";
+        
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:addStudentIdentifier];
+        if (!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addStudentIdentifier];
+        }
+        
+        cell.textLabel.text = @"Add Student";
+        cell.textLabel.textColor = [UIColor blueColor];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+        return cell;
+        
+    }else{
+        
+        static NSString* studentIdentifier = @"StudentCell";
+        
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:studentIdentifier];
+        
+        if (!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:studentIdentifier];
+        }
+        
+        EMGroup* group = [self.groupsArray objectAtIndex:indexPath.section];
+        EMStudent* student = [group.studentsArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", student.firstName, student.lastName] ;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%1.2f", student.averageGrade];
+        
+        if (student.averageGrade >= 4.0){
+            cell.detailTextLabel.textColor = [UIColor greenColor];
+        }else if (student.averageGrade >=3.0){
+            cell.detailTextLabel.textColor = [UIColor orangeColor];
+        }else if (student.averageGrade < 3.0){
+            cell.detailTextLabel.textColor = [UIColor redColor];
+        }
+        return cell;
     }
-    
-    EMGroup* group = [self.groupsArray objectAtIndex:indexPath.section];
-    EMStudent* student = [group.studentsArray objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", student.firstName, student.lastName] ;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%1.2f", student.averageGrade];
-    
-    if (student.averageGrade >= 4.0){
-        cell.detailTextLabel.textColor = [UIColor greenColor];
-    }else if (student.averageGrade >=3.0){
-        cell.detailTextLabel.textColor = [UIColor orangeColor];
-    }else if (student.averageGrade < 3.0){
-        cell.detailTextLabel.textColor = [UIColor redColor];
-    }
-    
-    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
     
     EMGroup* sourceGroup = [self.groupsArray objectAtIndex:indexPath.section];
-    EMStudent* student = [sourceGroup.studentsArray objectAtIndex:indexPath.row];
-    
-    return student.averageGrade < 4.0;
+    //EMStudent* student = [sourceGroup.studentsArray objectAtIndex:indexPath.row];
+    return indexPath.row < [[sourceGroup studentsArray] count];//student.averageGrade < 4.0;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
@@ -188,8 +205,10 @@
     
     if (sourceIndexPath.section == destinationIndexPath.section){
         
-        [tempArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-        sourceGroup.studentsArray = tempArray;
+//        if (destinationIndexPath.row != [[[self.groupsArray objectAtIndex:destinationIndexPath.section] studentsArray]count] && sourceIndexPath.row != [[[self.groupsArray objectAtIndex:sourceIndexPath.section] studentsArray]count]){
+            [tempArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+            sourceGroup.studentsArray = tempArray;
+     //   }
     }else{
     
         [tempArray removeObject:student];
@@ -212,6 +231,60 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     return FALSE;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    
+    if (sourceIndexPath.section != proposedDestinationIndexPath.section){
+        if (proposedDestinationIndexPath.row == [[[self.groupsArray objectAtIndex:proposedDestinationIndexPath.section] studentsArray] count]+1){
+            return sourceIndexPath;
+        }else{
+            return proposedDestinationIndexPath;
+        }
+    }else{
+        if (proposedDestinationIndexPath.row == [[[self.groupsArray objectAtIndex:proposedDestinationIndexPath.section] studentsArray] count]){
+            return sourceIndexPath;
+        }else{
+            return proposedDestinationIndexPath;
+        }
+
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    
+    if (indexPath.row == [[[self.groupsArray objectAtIndex:indexPath.section] studentsArray] count]){
+        
+        EMGroup* group = [self.groupsArray objectAtIndex:indexPath.section];
+        NSMutableArray* tempStudentArray = [NSMutableArray arrayWithArray:group.studentsArray];
+        [tempStudentArray addObject:[EMStudent randomStudent]];
+        
+        group.studentsArray = tempStudentArray;
+        
+        
+        
+        [self.tableView beginUpdates];
+        
+        
+            NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:  inSection:<#(NSInteger)#>]
+        
+            [self.tableView insertRowsAtIndexPaths:<#(nonnull NSArray<NSIndexPath *> *)#> withRowAnimation:<#(UITableViewRowAnimation)#>];
+        
+        
+        [self.tableView endUpdates];
+        
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([[UIApplication sharedApplication] isIgnoringInteractionEvents]){
+                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            }
+        });
+
+    }
 }
 
 @end
