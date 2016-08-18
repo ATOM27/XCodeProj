@@ -259,6 +259,25 @@
 }
 
 #pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    cell.frame = CGRectMake(CGRectGetMinX(cell.frame) - CGRectGetMaxX(cell.frame),
+                            CGRectGetMinY(cell.frame),
+                            CGRectGetWidth(cell.frame),
+                            CGRectGetHeight(cell.frame));
+    
+    [UIView animateWithDuration:0.3f
+                          delay:0.f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         cell.frame = CGRectMake(CGRectGetMaxX(cell.frame),
+                                                 CGRectGetMinY(cell.frame),
+                                                 CGRectGetWidth(cell.frame),
+                                                 CGRectGetHeight(cell.frame));
+
+                     } completion:^(BOOL finished) {
+                     }];
+}
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return indexPath.row == [[[self.groupsArray objectAtIndex:indexPath.section] studentsArray] count] ? UITableViewCellEditingStyleNone : UITableViewCellEditingStyleDelete;
@@ -317,6 +336,17 @@
     }
 }
 
-
+//-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([tableView rectForHeaderInSection:section]), CGRectGetHeight([tableView rectForHeaderInSection:section]))];
+//    headerView.backgroundColor = [UIColor colorWithRed:31.f / 255.f green:51.f / 255.f blue:82.f / 255.f alpha:1.0];
+//    
+//    UILabel* labelForHeaderView = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth([tableView rectForHeaderInSection:section]), CGRectGetHeight([tableView rectForHeaderInSection:section]))];
+//    labelForHeaderView.text = [[self.groupsArray objectAtIndex:section] name];
+//    labelForHeaderView.textColor = [UIColor whiteColor];
+//    
+//    [headerView addSubview:labelForHeaderView];
+//    return headerView;
+//}
 
 @end
