@@ -12,6 +12,7 @@
 @interface EMViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray* sectionsOfArray;
+@property (strong, nonatomic) UITableView* tableView;
 
 @end
 
@@ -28,6 +29,8 @@
     tableView.dataSource = self;
     
     tableView.editing = TRUE;
+    
+    self.tableView = tableView;
 }
 
 - (void)viewDidLoad {
@@ -111,9 +114,29 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        ClassForSection* cfs = [self.sectionsOfArray objectAtIndex:indexPath.section];
+        NSMutableArray* tempArray = [NSMutableArray arrayWithArray:cfs.membersInSection];
+        [tempArray removeObjectAtIndex:indexPath.row];
+        
+        cfs.membersInSection = tempArray;
+        
+        [self.tableView beginUpdates];
+        
+                NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section];
+                [self.tableView deleteRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [self.tableView endUpdates];
+        
+        
+    }
+}
+
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
 }
 @end
