@@ -38,11 +38,47 @@
     [super viewDidLoad];
     
     self.navigationItem.title = [self.path lastPathComponent];
+    
+    if ([self.navigationController.viewControllers count] > 1){
+        UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"Back to root"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(actionBackToRoot:)];
+        
+        self.navigationItem.rightBarButtonItem = item;
+    }
  }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    NSLog(@"viewDidAppear path = %@", self.path);
+    NSLog(@"viewDidAppear view controllers on stack = %ld", [self.navigationController.viewControllers count]);
+    NSLog(@"viewDidAppear index on stack = %ld", [self.navigationController.viewControllers indexOfObject:self]);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL) isDirectoryAtIndexPath:(NSIndexPath*) indexPath{
+    
+    NSString* fileName = [self.contents objectAtIndex:indexPath.row];
+    
+    NSString* filePath = [self.path stringByAppendingPathComponent:fileName];
+    
+    BOOL isDirectory = NO;
+    
+    [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory];
+    
+    return isDirectory;
+}
+
+#pragma mark - Actions
+
+-(void) actionBackToRoot:(UIBarButtonItem*) sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -64,19 +100,32 @@
     
     NSString* fileName = [self.contents objectAtIndex:indexPath.row];
     
-    BOOL isDirectory = NO;
-    
-    NSString* filePath = [self.path stringByAppendingPathComponent:fileName];
-    
-    [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory];
-    
-    if (isDirectory){
-        
-    }
-    
     cell.textLabel.text = fileName;
     
+    if ([self isDirectoryAtIndexPath:indexPath]){
+        cell.imageView.image = [UIImage imageNamed:@"folder.png"];
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"file.png"];
+    }
+    
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([self isDirectoryAtIndexPath:indexPath]){
+        
+        NSString* fileName = [self.contents objectAtIndex:indexPath.row];
+        NSString* path = [self.path stringByAppendingPathComponent:fileName];
+        
+        EMDirectoryTableViewController* vc = [[EMDirectoryTableViewController alloc] initWithFolderPath:path];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end
