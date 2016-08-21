@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="-102" y="359"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Directory Table View Controller-->
         <scene sceneID="s0E-nJ-uL5">
             <objects>
-                <tableViewController id="wIX-eb-hGF" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EMDirectoryTableViewController" id="wIX-eb-hGF" customClass="EMDirectoryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XLg-Bz-csG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

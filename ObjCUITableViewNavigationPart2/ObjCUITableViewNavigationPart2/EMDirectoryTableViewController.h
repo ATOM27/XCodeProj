@@ -10,4 +10,6 @@
 
 @interface EMDirectoryTableViewController : UITableViewController
 
+-(instancetype)initWithPath:(NSString*) path;
+
 @end
