@@ -17,6 +17,7 @@
 		D649DF001D69020400AC1B87 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = D649DEFE1D69020400AC1B87 /* file.png */; };
 		D649DF011D69020400AC1B87 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = D649DEFF1D69020400AC1B87 /* folder.png */; };
 		D649DF041D69058200AC1B87 /* EMDirectoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D649DF031D69058200AC1B87 /* EMDirectoryTableViewController.m */; };
+		D649DF081D6B962B00AC1B87 /* EMCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D649DF071D6B962B00AC1B87 /* EMCustomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		D649DEFF1D69020400AC1B87 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		D649DF021D69058200AC1B87 /* EMDirectoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMDirectoryTableViewController.h; sourceTree = "<group>"; };
 		D649DF031D69058200AC1B87 /* EMDirectoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMDirectoryTableViewController.m; sourceTree = "<group>"; };
+		D649DF061D6B962B00AC1B87 /* EMCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCustomTableViewCell.h; sourceTree = "<group>"; };
+		D649DF071D6B962B00AC1B87 /* EMCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCustomTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 				D649DED61D69011A00AC1B87 /* Assets.xcassets */,
 				D649DED81D69011A00AC1B87 /* LaunchScreen.storyboard */,
 				D649DEDB1D69011A00AC1B87 /* Info.plist */,
+				D649DF051D6B960700AC1B87 /* Cell */,
 				D649DECA1D69011A00AC1B87 /* Supporting Files */,
 			);
 			path = ObjCUITableViewNavigationPart2;
@@ -153,6 +157,15 @@
 			);
 			name = images;
 			path = ../ObjCUITableViewEditing/images;
+			sourceTree = "<group>";
+		};
+		D649DF051D6B960700AC1B87 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D649DF061D6B962B00AC1B87 /* EMCustomTableViewCell.h */,
+				D649DF071D6B962B00AC1B87 /* EMCustomTableViewCell.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +305,7 @@
 			files = (
 				D649DECF1D69011A00AC1B87 /* AppDelegate.m in Sources */,
 				D649DF041D69058200AC1B87 /* EMDirectoryTableViewController.m in Sources */,
+				D649DF081D6B962B00AC1B87 /* EMCustomTableViewCell.m in Sources */,
 				D649DECC1D69011A00AC1B87 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +530,7 @@
 				D649DEF61D69011A00AC1B87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D649DEF71D69011A00AC1B87 /* Build configuration list for PBXNativeTarget "ObjCUITableViewNavigationPart2Tests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +539,7 @@
 				D649DEF91D69011A00AC1B87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D649DEFA1D69011A00AC1B87 /* Build configuration list for PBXNativeTarget "ObjCUITableViewNavigationPart2UITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +548,7 @@
 				D649DEFC1D69011A00AC1B87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

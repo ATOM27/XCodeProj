@@ -7,11 +7,13 @@
 //
 
 #import "EMDirectoryTableViewController.h"
+#import "EMCustomTableViewCell.h"
 
 @interface EMDirectoryTableViewController ()
 
 @property (strong, nonatomic) NSString* path;
 @property (strong, nonatomic) NSArray* contents;
+@property (strong, nonatomic) NSString* selectedPath;
 
 @end
 
@@ -82,6 +84,20 @@
     return isDirectory;
 }
 
+-(NSString*) fileSizeFromValue:(unsigned long long) size{
+    
+    static NSString* units[] = {@"B", @"KB", @"MB", @"GB", @"TB"};
+    static int unitsCount = 5;
+    CGFloat fileSize = (CGFloat)size;
+    
+    NSInteger index = 0;
+    while(fileSize > 1024 && index < unitsCount){
+        fileSize = fileSize / 1024;
+        index++;
+    }
+    return [NSString stringWithFormat:@"%.2f %@", fileSize, units[index]];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,28 +106,52 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString* indentidier = @"Cell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:indentidier];
-    
-    if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentidier];
-    }
+    static NSString* FolderIdentidier = @"FolderCell";
+    static NSString* FileIdentidier = @"FileCell";
     
     NSString* fileName = [self.contents objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = fileName;
-    
     if ([self isDirectoryAtIndexPath:indexPath]){
-        cell.imageView.image = [UIImage imageNamed:@"folder.png"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:FolderIdentidier];
+        
+        cell.textLabel.text = fileName;
+        
+        return cell;
     }else{
-        cell.imageView.image = [UIImage imageNamed:@"file.png"];
+        
+        EMCustomTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:FileIdentidier];
+        
+        NSString* path = [self.path stringByAppendingPathComponent:fileName];
+        
+        NSDictionary* attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+        
+        cell.fileName.text = fileName;
+        cell.fileSize.text = [self fileSizeFromValue:[attributes fileSize]];
+        
+        static NSDateFormatter* dateFormatter = nil;
+        
+        if (!dateFormatter){
+            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"dd/MM/yyyy hh:mm";
+        }
+        cell.fileDate.text = [dateFormatter stringFromDate:[attributes fileModificationDate]];
+        return cell;
     }
     
-    return cell;
+    
+    
+    
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self isDirectoryAtIndexPath:indexPath]){
+        return 43.f;
+    }else{
+        return 80.f;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -121,14 +161,41 @@
         
         NSString* fileName = [self.contents objectAtIndex:indexPath.row];
         NSString* path = [self.path stringByAppendingPathComponent:fileName];
+        self.selectedPath = path;
+
+//There are 3 different ways to create a new controller
+// -----------------FIRST----------------
         
         //EMDirectoryTableViewController* vc = [[EMDirectoryTableViewController alloc] initWithPath:path];
         //[self.navigationController pushViewController:vc animated:YES];
         
-        EMDirectoryTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"EMDirectoryTableViewController"]; // need to use only if you work with storyboard(create labels, buttons, etc on storyboard). So if you'll create new ViewController with storyboard all your(labels, buttons, etc) will create too, but if you init you controller through code there will no any labels and buttons on it.
-        vc.path = path;
-        [self.navigationController pushViewController:vc animated:YES];
+// -----------------SECOND----------------
+
+        //EMDirectoryTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"EMDirectoryTableViewController"]; // need to use only if you work with storyboard(create labels, buttons, etc on storyboard). So if you'll create new ViewController with storyboard all your(labels, buttons, etc) will create too, but if you init you controller through code there will no any labels and buttons on it.
+        //vc.path = path;
+        //[self.navigationController pushViewController:vc animated:YES];
+        
+// -----------------THIRD----------------
+
+        [self performSegueWithIdentifier:@"navigateDeep" sender:nil];
     }
+}
+
+#pragma mark - Segue
+-(BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    
+    NSLog(@"shouldPerformSegueWithIdentifier: %@", identifier);
+    
+    return YES;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender{
+    
+    NSLog(@"prepareForSegue: %@", segue.identifier);
+    
+    EMDirectoryTableViewController* vc = segue.destinationViewController;
+    
+    vc.path = self.selectedPath;
 }
 
 @end
