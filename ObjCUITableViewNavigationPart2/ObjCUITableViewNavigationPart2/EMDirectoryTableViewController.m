@@ -70,12 +70,24 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void) actionAddFolder:(NSString*) folderName{
+    
+    NSString* path = [self.path stringByAppendingPathComponent:folderName];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil];
+}
 #pragma mark - DRY
 
 -(BOOL) isDirectoryAtIndexPath:(NSIndexPath*) indexPath{
     
-    NSString* fileName = [self.contents objectAtIndex:indexPath.row];
-    NSString* path = [self.path stringByAppendingPathComponent:fileName];
+    NSString* path = nil;
+    
+    @try {
+         NSString* fileName = [self.contents objectAtIndex:indexPath.row];
+         path = [self.path stringByAppendingPathComponent:fileName];
+    } @catch (NSException *exception) {
+        return NO;
+    }
     
     BOOL isDirectory = NO;
     
@@ -83,6 +95,8 @@
     
     return isDirectory;
 }
+
+
 
 -(NSString*) fileSizeFromValue:(unsigned long long) size{
     
@@ -101,13 +115,21 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.contents count];
+    return [self.contents count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString* FolderIdentidier = @"FolderCell";
     static NSString* FileIdentidier = @"FileCell";
+    static NSString* AddFIleIdentifier = @"addFolderIdentifier";
+    
+    if (indexPath.row == [self.contents count]){
+        
+        UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:AddFIleIdentifier];
+        
+        return cell;
+    }
     
     NSString* fileName = [self.contents objectAtIndex:indexPath.row];
     
@@ -178,6 +200,30 @@
 // -----------------THIRD----------------
 
         [self performSegueWithIdentifier:@"navigateDeep" sender:nil];
+    }else{
+        
+        if (indexPath.row == [self.contents count]){
+            
+            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Folder" message:@"Enter foler name" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString* folderName = alertController.textFields.firstObject.text;
+                [self actionAddFolder:folderName];
+                
+            }];
+            [alertController addAction:ok];
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+            [alertController addAction:cancel];
+            
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.placeholder = @"Enter folder name";
+            }];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+        }
+
     }
 }
 
