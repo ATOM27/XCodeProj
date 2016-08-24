@@ -49,13 +49,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if ([self.navigationController.viewControllers count] > 1){
-        UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"Back to Root"
-                                                                 style:UIBarButtonItemStylePlain
-                                                                target:self
-                                                                action:@selector(actionBackToRoot:)];
-        self.navigationItem.rightBarButtonItem = item;
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                target:self
+                                                                                action:@selector(actionEdit:)];
+    if ([self backToRootBarButton] != nil){
+        self.navigationItem.rightBarButtonItems = @[editButton, [self backToRootBarButton]];
+    }else{
+        self.navigationItem.rightBarButtonItems = @[editButton];
     }
+    
     
 }
 
@@ -65,6 +67,29 @@
 }
 
 #pragma mark - Actions
+-(void) actionEdit:(UIBarButtonItem*) sender{
+    BOOL isEditing = self.tableView.editing;
+    
+    [self.tableView setEditing:!isEditing animated:YES];
+    
+    UIBarButtonSystemItem item = UIBarButtonSystemItemDone;
+    
+    if (isEditing){
+        item = UIBarButtonSystemItemEdit;
+    }
+    
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:item
+                                                                                target:self
+                                                                                action:@selector(actionEdit:)];
+    
+    if ([self backToRootBarButton] != nil){
+        self.navigationItem.rightBarButtonItems = @[editButton, [self backToRootBarButton]];
+    }else{
+        self.navigationItem.rightBarButtonItems = @[editButton];
+    }
+
+    
+}
 
 -(void) actionBackToRoot:(UIBarButtonItem*) sender{
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -75,8 +100,25 @@
     NSString* path = [self.path stringByAppendingPathComponent:folderName];
     
     [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    self.contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.path error:nil];
+    
+    [self.tableView reloadData];
+    
+    
 }
 #pragma mark - DRY
+-(UIBarButtonItem*) backToRootBarButton{
+    
+    UIBarButtonItem* item = nil;
+    if ([self.navigationController.viewControllers count] > 1){
+        item = [[UIBarButtonItem alloc] initWithTitle:@"Back to Root"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(actionBackToRoot:)];
+    }
+    return item;
+}
 
 -(BOOL) isDirectoryAtIndexPath:(NSIndexPath*) indexPath{
     
@@ -113,6 +155,28 @@
 }
 
 #pragma mark - UITableViewDataSource
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        
+        NSString* fileName = [self.contents objectAtIndex:indexPath.row];
+        NSString* path = [self.path stringByAppendingPathComponent:fileName];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        
+        NSMutableArray* tempArray = [NSMutableArray arrayWithArray:self.contents];
+        [tempArray removeObjectAtIndex:indexPath.row];
+        
+        self.contents = tempArray;
+        
+        [self.tableView beginUpdates];
+        
+            NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+            [self.tableView deleteRowsAtIndexPaths:@[newIndexPath] withRowAnimation:YES];
+        
+        [self.tableView endUpdates];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.contents count] + 1;
@@ -167,6 +231,10 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return indexPath.row == [self.contents count] ? UITableViewCellEditingStyleNone : UITableViewCellEditingStyleDelete;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self isDirectoryAtIndexPath:indexPath]){
         return 43.f;
@@ -207,6 +275,7 @@
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Folder" message:@"Enter foler name" preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
                 NSString* folderName = alertController.textFields.firstObject.text;
                 [self actionAddFolder:folderName];
                 
