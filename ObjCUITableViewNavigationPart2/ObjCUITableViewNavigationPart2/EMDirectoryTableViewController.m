@@ -28,6 +28,32 @@
     return self;
 }
 
+-(void) setContents:(NSArray *)contents{
+    
+    NSMutableArray* filesArray = [[NSMutableArray alloc] init];
+    NSMutableArray* directoriesArray = [[NSMutableArray alloc] init];
+    
+    for (NSString* str in contents){
+        if ([self isDirectory:str]){
+            
+            [directoriesArray addObject:str];
+        }else{
+            
+            [filesArray addObject:str];
+        }
+    }
+    
+    [filesArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
+    
+    [directoriesArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
+    
+    _contents = [directoriesArray arrayByAddingObjectsFromArray:filesArray];
+}
+
 -(void) setPath:(NSString *)path{
     _path = path;
     
@@ -119,6 +145,16 @@
     }
     return item;
 }
+-(BOOL) isDirectory:(NSString*) file{
+    
+    NSString* path = [self.path stringByAppendingPathComponent:file];
+    
+    BOOL isDirectory = NO;
+    
+    [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
+    
+    return isDirectory;
+}
 
 -(BOOL) isDirectoryAtIndexPath:(NSIndexPath*) indexPath{
     
@@ -152,6 +188,22 @@
         index++;
     }
     return [NSString stringWithFormat:@"%.2f %@", fileSize, units[index]];
+}
+
+-(void) cellForHiddenFIles:(EMCustomTableViewCell*) cell isDirectory:(BOOL) isDirectory indexPath:(NSIndexPath*) indexPath{
+    
+    if ([[self.contents objectAtIndex:indexPath.row] hasPrefix:@"."]){
+        if (isDirectory){
+            cell.imageView.alpha = 0.5f;
+            cell.textLabel.alpha = 0.5f;
+        }else{
+            cell.image.alpha = 0.5f;
+            cell.fileSize.alpha = 0.5f;
+            cell.fileDate.alpha = 0.5f;
+            cell.fileSize.alpha = 0.5f;
+            cell.fileName.alpha = 0.5f;
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -201,7 +253,12 @@
         
         UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:FolderIdentidier];
         
+        cell.imageView.alpha = 1.f;
+        cell.textLabel.alpha = 1.f;
+        
         cell.textLabel.text = fileName;
+        
+        [self cellForHiddenFIles:cell isDirectory:YES indexPath:indexPath];
         
         return cell;
     }else{
@@ -222,6 +279,15 @@
             dateFormatter.dateFormat = @"dd/MM/yyyy hh:mm";
         }
         cell.fileDate.text = [dateFormatter stringFromDate:[attributes fileModificationDate]];
+        
+        cell.image.alpha = 1.f;
+        cell.fileSize.alpha = 1.f;
+        cell.fileDate.alpha = 1.f;
+        cell.fileSize.alpha = 1.f;
+        cell.fileName.alpha = 1.f;
+        
+        [self cellForHiddenFIles:cell isDirectory:NO indexPath:indexPath];
+        
         return cell;
     }
     

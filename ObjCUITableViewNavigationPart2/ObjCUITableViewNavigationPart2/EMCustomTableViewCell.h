@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *fileName;
 @property (weak, nonatomic) IBOutlet UILabel *fileSize;
 @property (weak, nonatomic) IBOutlet UILabel *fileDate;
+@property (weak, nonatomic) IBOutlet UIImageView *image;
 
 @end
