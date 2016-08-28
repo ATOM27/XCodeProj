@@ -8,6 +8,7 @@
 
 #import "EMDirectoryTableViewController.h"
 #import "EMCustomTableViewCell.h"
+#import "UITableViewCellCategory.h"
 
 @interface EMDirectoryTableViewController ()
 
@@ -360,6 +361,26 @@
         }
 
     }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    NSString* message = [NSString stringWithFormat:@"%lld B", [cell superSize:[self.path stringByAppendingPathComponent:cell.textLabel.text]]];
+    
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Info" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString* folderName = alertController.textFields.firstObject.text;
+        [self actionAddFolder:folderName];
+        
+    }];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 #pragma mark - Segue

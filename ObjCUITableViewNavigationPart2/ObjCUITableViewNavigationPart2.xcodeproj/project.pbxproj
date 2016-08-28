@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60B05071D735E6F00222E8F /* UITableViewCellCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D60B05061D735E6F00222E8F /* UITableViewCellCategory.m */; };
 		D649DECC1D69011A00AC1B87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D649DECB1D69011A00AC1B87 /* main.m */; };
 		D649DECF1D69011A00AC1B87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D649DECE1D69011A00AC1B87 /* AppDelegate.m */; };
 		D649DED51D69011A00AC1B87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D649DED31D69011A00AC1B87 /* Main.storyboard */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D60B05051D735E6F00222E8F /* UITableViewCellCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellCategory.h; sourceTree = "<group>"; };
+		D60B05061D735E6F00222E8F /* UITableViewCellCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellCategory.m; sourceTree = "<group>"; };
 		D649DEC71D69011A00AC1B87 /* ObjCUITableViewNavigationPart2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCUITableViewNavigationPart2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D649DECB1D69011A00AC1B87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D649DECD1D69011A00AC1B87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D60B05081D735EC700222E8F /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D60B05051D735E6F00222E8F /* UITableViewCellCategory.h */,
+				D60B05061D735E6F00222E8F /* UITableViewCellCategory.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		D649DEBE1D69011900AC1B87 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 				D649DED61D69011A00AC1B87 /* Assets.xcassets */,
 				D649DED81D69011A00AC1B87 /* LaunchScreen.storyboard */,
 				D649DEDB1D69011A00AC1B87 /* Info.plist */,
+				D60B05081D735EC700222E8F /* Category */,
 				D649DF051D6B960700AC1B87 /* Cell */,
 				D649DECA1D69011A00AC1B87 /* Supporting Files */,
 			);
@@ -306,6 +319,7 @@
 				D649DECF1D69011A00AC1B87 /* AppDelegate.m in Sources */,
 				D649DF041D69058200AC1B87 /* EMDirectoryTableViewController.m in Sources */,
 				D649DF081D6B962B00AC1B87 /* EMCustomTableViewCell.m in Sources */,
+				D60B05071D735E6F00222E8F /* UITableViewCellCategory.m in Sources */,
 				D649DECC1D69011A00AC1B87 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
