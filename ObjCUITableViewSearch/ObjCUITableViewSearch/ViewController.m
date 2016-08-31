@@ -13,7 +13,9 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) NSArray* namesArray;
-@property (strong, nonatomic) NSMutableArray* sectionsArray;
+@property (strong, nonatomic) NSArray* sectionsArray;
+@property (strong, nonatomic) NSOperation* currentOperation;
+
 @end
 
 @implementation ViewController
@@ -25,7 +27,7 @@
     NSMutableArray* array = [[NSMutableArray alloc] init];
     self.sectionsArray = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < 100; i++){
+    for (int i = 0; i < 100000; i++){
         [array addObject:[[NSString randomAlphanumericString] capitalizedString]];
     }
     
@@ -34,10 +36,51 @@
     [array sortUsingDescriptors:@[sortDescriptor]];
     
     self.namesArray = array;
+    //self.sectionsArray = [self generateSectionsFromArray:self.namesArray withFilter:self.searchBar.text];
+    //[self.tableView reloadData];
     
+    [self generateSectionsInBackGroundFromArray:self.namesArray withFilter:self.searchBar.text];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private methods
+
+-(void) generateSectionsInBackGroundFromArray:(NSArray*) array withFilter:(NSString*) filterString{
+    
+    [self.currentOperation cancel]; // if this method called the previous operation canceled
+    
+    __weak ViewController* weakSelf = self;
+    
+    self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        NSArray* sectionsArray = [weakSelf generateSectionsFromArray:array withFilter:filterString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            weakSelf.sectionsArray = sectionsArray;
+            [weakSelf.tableView reloadData]; // reloadData need to use only in main queue
+            
+            self.currentOperation = nil;
+        });
+    }];
+    
+    [self.currentOperation start];
+}
+
+-(NSArray*) generateSectionsFromArray:(NSArray*) array withFilter:(NSString*) filterString{
+    
+    NSMutableArray* sectionsArray = [[NSMutableArray alloc] init];
     NSString* currentLatter = nil;
     
-    for (NSString* string in self.namesArray){
+    for (NSString* string in array){
+        
+        if ([filterString length] > 0 && [string rangeOfString:filterString].location == NSNotFound){
+            continue; 
+        }
         
         NSString* firstLetter = [string substringToIndex:1];
         
@@ -50,22 +93,31 @@
             section.itemsArray = [[NSMutableArray alloc] init];
             currentLatter = firstLetter;
             
-            [self.sectionsArray addObject:section];
+            [sectionsArray addObject:section];
             
         }else{
-            section = [self.sectionsArray lastObject];
+            section = [sectionsArray lastObject];
         }
         
         [section.itemsArray addObject:string];
     }
-}
+    
+    return sectionsArray;
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource
+- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    
+    for (EMSection* section in self.sectionsArray){
+        [array addObject:section.sectionName];
+    }
+    
+    return array;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.sectionsArray count];
 
@@ -96,4 +148,24 @@
     return cell;
 }
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    NSLog(@"Text did change: %@", self.searchBar.text);
+    
+    //self.sectionsArray = [self generateSectionsFromArray:self.namesArray withFilter:searchText];
+    //[self.tableView reloadData];
+    [self generateSectionsInBackGroundFromArray:self.namesArray withFilter:searchText];
+}
 @end
