@@ -123,7 +123,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
                     <connections>
-                        <segue destination="wIX-eb-hGF" kind="push" identifier="navigateDeep" id="Exf-eh-FwG"/>
+                        <segue destination="wIX-eb-hGF" kind="push" identifier="navigateDeep" id="2aS-Uy-I7g"/>
                     </connections>
                 </button>
             </objects>
