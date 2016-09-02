@@ -40,9 +40,11 @@ typedef NS_ENUM(NSInteger, EMSortType){
     
     self.students = tempStudentsArray;
     
-    self.students = [self sortStudentsOnDate:self.students];
+    //self.students = [self sortStudents:self.students withSortType:self.segmentedControl.selectedSegmentIndex];// delete when all will be ok!
     
-    [self generateSectionsFromArrayInBackgroundWithDate:self.students withFilter:self.searchBar.text];
+    //[self generateSectionsFromArrayInBackgroundWithDate:self.students withFilter:self.searchBar.text];
+    
+    [self generateSectionsFromArrayInBackground:self.students withFilter:self.searchBar.text andSortType:self.segmentedControl.selectedSegmentIndex];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,15 +53,27 @@ typedef NS_ENUM(NSInteger, EMSortType){
 }
 
 #pragma mark - Private methods
--(void) generateSectionsFromArrayInBackground:(NSArray*) students withFilter:(NSString*) filterString{
+-(void) generateSectionsFromArrayInBackground:(NSArray*) students withFilter:(NSString*) filterString andSortType:(EMSortType) sortType{
     
     [self.currentOperation cancel];
     
     __weak ViewController* weakSelf = self;
     
     self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
-
-        weakSelf.sections = [weakSelf generateSectionsFromArrayWithDate:students withFilter:filterString]];
+        
+       self.students = [self sortStudents:students withSortType:sortType];
+        
+        switch (sortType) {
+            case EMSortTypeBirthDate:
+               weakSelf.sections = [self generateSectionsFromArrayWithDate:self.students withFilter:filterString];
+                break;
+            case EMSortTypeName:
+                weakSelf.sections = [self generateSectionsFromArrayWithName:self.students withFilter:filterString];
+                break;
+            case EMSortTypeSecondName:
+                weakSelf.sections = [self generateSectionsFromArrayWithSecondName:self.students withFilter:filterString];
+                break;
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -73,49 +87,26 @@ typedef NS_ENUM(NSInteger, EMSortType){
     
 }
 
-
--(void) generateSectionsFromArrayInBackgroundWithName:(NSArray*) students withFilter:(NSString*) filterString{
-    
-    [self.currentOperation cancel];
-    
-    __weak ViewController* weakSelf = self;
-    
-    self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
-        
-        weakSelf.sections = [weakSelf ];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [weakSelf.tableView reloadData];
-            weakSelf.currentOperation = nil;
-        });
-        
-    }];
-    
-    [self.currentOperation start];
-    
-}
-
--(void) generateSectionsFromArrayInBackgroundWithDate:(NSArray*) students withFilter:(NSString*) filterString{
-    
-    [self.currentOperation cancel];
-    
-    __weak ViewController* weakSelf = self;
-    
-    self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
-        
-       weakSelf.sections = [weakSelf generateSectionsFromArrayWithDate:students withFilter:filterString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [weakSelf.tableView reloadData];
-            weakSelf.currentOperation = nil;
-        });
-        
-    }];
-    
-    [self.currentOperation start];
-}
+//-(void) generateSectionsFromArrayInBackgroundWithDate:(NSArray*) students withFilter:(NSString*) filterString{
+//    
+//    [self.currentOperation cancel];
+//    
+//    __weak ViewController* weakSelf = self;
+//    
+//    self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
+//        
+//       weakSelf.sections = [weakSelf generateSectionsFromArrayWithDate:students withFilter:filterString];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            [weakSelf.tableView reloadData];
+//            weakSelf.currentOperation = nil;
+//        });
+//        
+//    }];
+//    
+//    [self.currentOperation start];
+//}
 
 -(NSMutableArray*) generateSectionsFromArrayWithDate:(NSArray*) students withFilter:(NSString*) filterString{
     
@@ -150,51 +141,126 @@ typedef NS_ENUM(NSInteger, EMSortType){
     
     for (EMSections* sec in sectionsArray){
         
-        NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+        NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES]; // descriptors works like dictionary. Key is property name and its value is like value for key
         NSSortDescriptor* lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
         
-        sec.studentsInSection = [sec.studentsInSection sortedArrayUsingDescriptors:@[nameDescriptor, lastNameDescriptor]];
+        sec.studentsInSection = [sec.studentsInSection sortedArrayUsingDescriptors:@[ nameDescriptor, lastNameDescriptor]];
     }
     return sectionsArray;
 }
 
--(NSArray*) sortStudentsOnDate:(NSArray*) students{
-   students = [students sortedArrayUsingComparator:^NSComparisonResult(EMStudent*  _Nonnull obj1, EMStudent*  _Nonnull obj2) {
-        
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        
-        NSDateComponents* componentsObj1 = [calendar components:NSCalendarUnitMonth fromDate:obj1.birthDate];
-        NSDateComponents* componentsObj2 = [calendar components:NSCalendarUnitMonth fromDate:obj2.birthDate];
-        
-        if (componentsObj1.month > componentsObj2.month){
-            return NSOrderedDescending;
-        }else{
-            return NSOrderedAscending;
-        }
-    }];
+-(NSMutableArray*) generateSectionsFromArrayWithName:(NSArray*) students withFilter:(NSString*) filterString{
     
-    return students;
-
+    NSString* currentLetter = nil;
+    NSMutableArray* sectionsArray = [[NSMutableArray alloc] init];
+    
+    for (EMStudent* student in students){
+        
+        if (filterString.length > 0 && ([student.firstName rangeOfString:filterString].location == NSNotFound && [student.lastName rangeOfString:filterString].location == NSNotFound)){
+            continue;
+        }
+        
+        NSString* studentFirstNameLetter = [student.firstName substringToIndex:1];
+        EMSections* section = nil;
+        
+        if (![studentFirstNameLetter isEqualToString:currentLetter]){
+            
+            section = [[EMSections alloc] init];
+            section.sectionName = studentFirstNameLetter;
+            section.studentsInSection = [[NSMutableArray alloc] init];
+            currentLetter = studentFirstNameLetter;
+            [sectionsArray addObject:section];
+            
+        }else{
+            section = [sectionsArray lastObject];
+        }
+        
+        [section.studentsInSection addObject:student];
+    }
+    
+    for (EMSections* sec in sectionsArray){
+        NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+        NSSortDescriptor* lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+        NSSortDescriptor* birthDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate" ascending:YES];
+        
+        sec.studentsInSection = [sec.studentsInSection sortedArrayUsingDescriptors:@[nameDescriptor, lastNameDescriptor, birthDateDescriptor]];
+    }
+    return sectionsArray;
 }
 
--(void) sortWithSelectedSegmentedControl:(UISegmentedControl*) segmentedControl{
+-(NSMutableArray*) generateSectionsFromArrayWithSecondName:(NSArray*) students withFilter:(NSString*) filterString{
     
-    switch (sender.selectedSegmentIndex) {
+    NSString* currentLetter = nil;
+    NSMutableArray* sectionsArray = [[NSMutableArray alloc] init];
+    
+    for (EMStudent* student in students){
+        
+        if (filterString.length > 0 && ([student.firstName rangeOfString:filterString].location == NSNotFound && [student.lastName rangeOfString:filterString].location == NSNotFound)){
+            continue;
+        }
+        
+        NSString* studentLastNameLetter = [student.lastName substringToIndex:1];
+        EMSections* section = nil;
+        
+        if (![studentLastNameLetter isEqualToString:currentLetter]){
+            
+            section = [[EMSections alloc] init];
+            section.sectionName = studentLastNameLetter;
+            section.studentsInSection = [[NSMutableArray alloc] init];
+            currentLetter = studentLastNameLetter;
+            [sectionsArray addObject:section];
+            
+        }else{
+            section = [sectionsArray lastObject];
+        }
+        
+        [section.studentsInSection addObject:student];
+    }
+    
+    for (EMSections* sec in sectionsArray){
+        
+        NSSortDescriptor* lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+        NSSortDescriptor* birthDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate" ascending:YES];
+        NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+        
+        sec.studentsInSection = [sec.studentsInSection sortedArrayUsingDescriptors:@[lastNameDescriptor ,birthDateDescriptor, nameDescriptor]];
+    }
+    return sectionsArray;
+}
+
+-(NSArray*) sortStudents:(NSArray*) students withSortType:(EMSortType) sortType{
+    
+    switch (sortType) {
         case EMSortTypeBirthDate:
-            
-            [self generateSectionsFromArrayInBackgroundWithDate:self.students withFilter:self.searchBar.text];
-            [self.tableView reloadData];
-            
+            students = [students sortedArrayUsingComparator:^NSComparisonResult(EMStudent*  _Nonnull obj1, EMStudent*  _Nonnull obj2) {
+                
+                NSCalendar* calendar = [NSCalendar currentCalendar];
+                
+                NSDateComponents* componentsObj1 = [calendar components:NSCalendarUnitMonth fromDate:obj1.birthDate];
+                NSDateComponents* componentsObj2 = [calendar components:NSCalendarUnitMonth fromDate:obj2.birthDate];
+                
+                if (componentsObj1.month > componentsObj2.month){
+                    return NSOrderedDescending;
+                }else{
+                    return NSOrderedAscending;
+                }
+            }];
             break;
             
         case EMSortTypeName:
-            
+            students = [students sortedArrayUsingComparator:^NSComparisonResult(EMStudent*  _Nonnull obj1, EMStudent*  _Nonnull obj2) {
+                return [obj1.firstName compare:obj2.firstName];
+            }];
             break;
-            
         case EMSortTypeSecondName:
-            <#statements#>
+            students = [students sortedArrayUsingComparator:^NSComparisonResult(EMStudent*  _Nonnull obj1, EMStudent*  _Nonnull obj2) {
+                return [obj1.lastName compare:obj2.lastName];
+            }];
             break;
+
     }
+    
+    return students;
 
 }
 
@@ -261,7 +327,7 @@ typedef NS_ENUM(NSInteger, EMSortType){
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    [self sortWithSelectedSegmentedControl:self.segmentedControl];
+    [self generateSectionsFromArrayInBackground:self.students withFilter:searchText andSortType:self.segmentedControl.selectedSegmentIndex];
 }
 
 
@@ -269,6 +335,6 @@ typedef NS_ENUM(NSInteger, EMSortType){
 #pragma mark - Actions
 
 - (IBAction)actionSortStudents:(UISegmentedControl *)sender {
-    [self sortWithSelectedSegmentedControl:sender];
+     [self generateSectionsFromArrayInBackground:self.students withFilter:self.searchBar.text andSortType:sender.selectedSegmentIndex];
 }
 @end
