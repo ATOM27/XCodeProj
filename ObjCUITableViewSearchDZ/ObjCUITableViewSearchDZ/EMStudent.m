@@ -44,7 +44,13 @@ static int namesCount = 50;
     EMStudent* student = [[EMStudent alloc] init];
     student.firstName = firstNames[arc4random() % namesCount];
     student.lastName = lastNames[arc4random() % namesCount];
-    student.birthDate = arc4random() % 11 + 1900;
+    
+    NSInteger secInDay = 24 * 60 * 60;
+    NSInteger secInYear = 364 * secInDay;
+    
+    NSInteger studentYears = (secInYear * (arc4random() % 10 + 18)) + (secInDay * (arc4random() % 364));
+    NSDate* date = [NSDate date];
+    student.birthDate = [date dateByAddingTimeInterval:-studentYears];
     
     return student;
 }

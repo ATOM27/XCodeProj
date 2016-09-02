@@ -46,7 +46,7 @@
 //    [dateFormatter setDateStyle: NSDateFormatterFullStyle];
 //    NSLog(@"%@",[dateFormatter stringFromDate:date]);
 //    
-//    [dateFormatter setDateFormat:@"yyyy M MM MMM MMMM MMMMM"];
+//    [dateFormatter setDateFormat:@"yyyy M MM MMM MMMM MMMMM"]; // M MM MMM this means how many letters would be in month
 //    NSLog(@"%@", [dateFormatter stringFromDate:date]);
 //
 //    [dateFormatter setDateFormat:@"yyyy /MM/dd EEE EEEE EEEEE HH:mm:SS"]; // HH - 0..23 hh - 0..12

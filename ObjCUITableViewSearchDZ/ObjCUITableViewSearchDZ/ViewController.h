@@ -10,6 +10,9 @@
 
 @interface ViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+- (IBAction)actionSortStudents:(UISegmentedControl *)sender;
 
 @end
 

@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;
-@property (assign, nonatomic) NSInteger birthDate;
+@property (strong, nonatomic) NSDate* birthDate;
 
 + (EMStudent*) randomStudent;
 
