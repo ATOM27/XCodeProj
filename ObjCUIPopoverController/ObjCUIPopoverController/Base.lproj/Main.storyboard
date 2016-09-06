@@ -43,7 +43,9 @@
                     <navigationItem key="navigationItem" id="pZw-rC-l02">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ptq-IS-t73">
                             <connections>
-                                <action selector="actionAdd:" destination="LZP-v3-nGd" id="Hcd-Js-MTc"/>
+                                <segue destination="bsv-QE-jHd" kind="popover" identifier="PopoverIdentifier" popoverAnchorBarButtonItem="Ptq-IS-t73" id="KFb-hZ-4op">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -70,6 +72,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CiT-RN-64w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -52,16 +52,17 @@
     [self presentViewController:navContr animated:YES completion:nil];
     
     UIPopoverPresentationController* popover = [navContr popoverPresentationController]; //[vc popoverPresentationController];
-    popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
     
     if ([sender isKindOfClass:[UIBarButtonItem class]]){
         
+        popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
         popover.barButtonItem = sender;
     }else if ([sender isKindOfClass:[UIButton class]]){
         
+        popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popover.sourceView = self.view;
         
-        popover.sourceRect = CGRectMake(CGRectGetMidX([(UIButton*)sender frame]), CGRectGetMinY([(UIButton*)sender frame]), 0, 0);// so if you want to set x and y of your popover you need to make "sourceRect" with 0 size, but in "vc.preferredContentSize" need to make prefered size of your popover;
+        popover.sourceRect = [(UIButton*)sender frame]; // so if you want to set x and y of your popover you need to make "sourceRect" with 0 size, but in "vc.preferredContentSize" need to make prefered size of your popover;
         //UIPopoverController* popover = [[UIPopoverController alloc] initWithContentViewController:vc];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -100,5 +101,14 @@
         
         [self showControllerAsModal:vc];
     }
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSLog(@"prepareForSegue: %@", segue.identifier);
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        
+    }
+    
 }
 @end
