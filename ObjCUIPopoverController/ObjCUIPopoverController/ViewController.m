@@ -79,7 +79,9 @@
     
         //UIPopoverController* popover = [[UIPopoverController alloc] initWithContentViewController:vc]; // deprecated
         
-        [self showController:vc inPopoverFromSender:sender];
+        //[self showController:vc inPopoverFromSender:sender]; commented because popover was made through storyboard
+        
+        
         //[popover presentPopoverFromBarButtonItem:sender
           //              permittedArrowDirections:UIPopoverArrowDirectionAny
             //                            animated:YES]; // deprecated
