@@ -16,7 +16,7 @@
             startingLineNumber = "90"
             endingLineNumber = "90"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -32,7 +32,7 @@
             startingLineNumber = "124"
             endingLineNumber = "124"
             landmarkName = "-timerMethod:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -48,7 +48,7 @@
             startingLineNumber = "83"
             endingLineNumber = "83"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -64,7 +64,7 @@
             startingLineNumber = "108"
             endingLineNumber = "108"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

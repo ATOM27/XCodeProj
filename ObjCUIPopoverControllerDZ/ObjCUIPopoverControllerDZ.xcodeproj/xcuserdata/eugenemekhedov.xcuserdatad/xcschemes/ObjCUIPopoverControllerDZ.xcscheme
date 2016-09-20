@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D685394B1D80B0A50026D4EA"
+               BlueprintIdentifier = "D67607DC1D91436E00D623FB"
                BuildableName = "ObjCUIPopoverControllerDZ.app"
                BlueprintName = "ObjCUIPopoverControllerDZ"
                ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D68539641D80B0A50026D4EA"
+               BlueprintIdentifier = "D67607F51D91436F00D623FB"
                BuildableName = "ObjCUIPopoverControllerDZTests.xctest"
                BlueprintName = "ObjCUIPopoverControllerDZTests"
                ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D685396F1D80B0A50026D4EA"
+               BlueprintIdentifier = "D67608001D91436F00D623FB"
                BuildableName = "ObjCUIPopoverControllerDZUITests.xctest"
                BlueprintName = "ObjCUIPopoverControllerDZUITests"
                ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D685394B1D80B0A50026D4EA"
+            BlueprintIdentifier = "D67607DC1D91436E00D623FB"
             BuildableName = "ObjCUIPopoverControllerDZ.app"
             BlueprintName = "ObjCUIPopoverControllerDZ"
             ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D685394B1D80B0A50026D4EA"
+            BlueprintIdentifier = "D67607DC1D91436E00D623FB"
             BuildableName = "ObjCUIPopoverControllerDZ.app"
             BlueprintName = "ObjCUIPopoverControllerDZ"
             ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">
@@ -94,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D685394B1D80B0A50026D4EA"
+            BlueprintIdentifier = "D67607DC1D91436E00D623FB"
             BuildableName = "ObjCUIPopoverControllerDZ.app"
             BlueprintName = "ObjCUIPopoverControllerDZ"
             ReferencedContainer = "container:ObjCUIPopoverControllerDZ.xcodeproj">

@@ -2,7 +2,7 @@
 //  ViewController.h
 //  ObjCUIPopoverControllerDZ
 //
-//  Created by Eugene Mekhedov on 07.09.16.
+//  Created by Eugene Mekhedov on 20.09.16.
 //  Copyright © 2016 Eugene Mekhedov. All rights reserved.
 //
 
@@ -10,7 +10,17 @@
 
 @interface ViewController : UITableViewController
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *rightItem;
+typedef NS_ENUM(NSInteger, UITextFieldName){
+    UITextFieldNameName,
+    UITextFieldNameSurname,
+    UITextFieldNameBirthDate,
+    UITextFieldNameEducation
+};
+
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFieldCollection;
+@property (strong, nonatomic) NSString* date;
+
+
 
 @end
 

@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUIPopoverControllerDZ/ViewController.m"
-            timestampString = "496097859.93332"
+            filePath = "ObjCUIPopoverController/ViewController.m"
+            timestampString = "496058602.954273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-textFieldShouldBeginEditing:"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-actionAdd:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUIPopoverControllerDZ/ViewController.m"
-            timestampString = "496097869.800538"
+            filePath = "ObjCUIPopoverController/ViewController.m"
+            timestampString = "496058617.004325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-setDate:"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-actionPressMe:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
