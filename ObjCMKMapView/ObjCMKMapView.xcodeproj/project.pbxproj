@@ -17,6 +17,7 @@
 		D636B9B11D927BCF0034EEBB /* ObjCMKMapViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D636B9B01D927BCF0034EEBB /* ObjCMKMapViewUITests.m */; };
 		D636B9C01D927CDD0034EEBB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D636B9BF1D927CDD0034EEBB /* MapKit.framework */; };
 		D636B9C31D92981E0034EEBB /* EMMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D636B9C21D92981E0034EEBB /* EMMapAnnotation.m */; };
+		D68D359C1D95C11C00D6B11D /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68D359B1D95C11C00D6B11D /* UIView+MKAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		D636B9BF1D927CDD0034EEBB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D636B9C11D92981E0034EEBB /* EMMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMapAnnotation.h; sourceTree = "<group>"; };
 		D636B9C21D92981E0034EEBB /* EMMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMapAnnotation.m; sourceTree = "<group>"; };
+		D68D359A1D95C11C00D6B11D /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
+		D68D359B1D95C11C00D6B11D /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				D636B9921D927BCF0034EEBB /* ViewController.m */,
 				D636B9C11D92981E0034EEBB /* EMMapAnnotation.h */,
 				D636B9C21D92981E0034EEBB /* EMMapAnnotation.m */,
+				D68D359A1D95C11C00D6B11D /* UIView+MKAnnotationView.h */,
+				D68D359B1D95C11C00D6B11D /* UIView+MKAnnotationView.m */,
 				D636B9941D927BCF0034EEBB /* Main.storyboard */,
 				D636B9971D927BCF0034EEBB /* Assets.xcassets */,
 				D636B9991D927BCF0034EEBB /* LaunchScreen.storyboard */,
@@ -292,6 +297,7 @@
 			files = (
 				D636B9931D927BCF0034EEBB /* ViewController.m in Sources */,
 				D636B9901D927BCF0034EEBB /* AppDelegate.m in Sources */,
+				D68D359C1D95C11C00D6B11D /* UIView+MKAnnotationView.m in Sources */,
 				D636B98D1D927BCF0034EEBB /* main.m in Sources */,
 				D636B9C31D92981E0034EEBB /* EMMapAnnotation.m in Sources */,
 			);
@@ -525,6 +531,7 @@
 				D636B9B71D927BCF0034EEBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D636B9B81D927BCF0034EEBB /* Build configuration list for PBXNativeTarget "ObjCMKMapViewTests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +540,7 @@
 				D636B9BA1D927BCF0034EEBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D636B9BB1D927BCF0034EEBB /* Build configuration list for PBXNativeTarget "ObjCMKMapViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +549,7 @@
 				D636B9BD1D927BCF0034EEBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

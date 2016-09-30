@@ -9,9 +9,10 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import "EMMapAnnotation.h"
+#import "UIView+MKAnnotationView.h"
 
 @interface ViewController () <MKMapViewDelegate> 
-
+@property (strong, nonatomic) CLGeocoder* geoCoder;
 @end
 
 @implementation ViewController
@@ -43,12 +44,21 @@
     //------------------------------------------------
     
     self.navigationItem.rightBarButtonItems = @[addButton, flexibleSpace, zoomButton];
+    
+    self.geoCoder = [[CLGeocoder alloc] init];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)dealloc{
+    
+    if ([self.geoCoder isGeocoding]){
+        [self.geoCoder cancelGeocode];
+    }
+
 }
 
 #pragma mark - Actions
@@ -76,7 +86,7 @@
         
         static double delta = 20000;
         
-        MKMapRect rect = MKMapRectMake( center.x - 20000, center.y - 20000, delta * 2, delta * 2);
+        MKMapRect rect = MKMapRectMake( center.x - delta, center.y - delta, delta * 2, delta * 2);
         
         zoomRect = MKMapRectUnion(zoomRect, rect);
     }
@@ -86,6 +96,51 @@
     [self.mapView setVisibleMapRect:zoomRect
                         edgePadding:UIEdgeInsetsMake(50, 50, 50, 50)
                            animated:YES];
+}
+
+-(void) actionDescription:(UIButton*) sender{
+    
+    MKAnnotationView* annotationView = [sender superAnnotationView];
+    
+    if (!annotationView){
+        return;
+    }
+    
+    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+    
+    CLLocation* location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+                                                      longitude:coordinate.longitude];
+    
+    if ([self.geoCoder isGeocoding]){
+        [self.geoCoder cancelGeocode];
+    }
+    
+    [self.geoCoder reverseGeocodeLocation:location
+                   completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+                       
+                       NSString* message = nil;
+                       
+                       if (error){
+                           message = [error localizedDescription];
+                       }else{
+                           
+                           if ([placemarks count] > 0){
+                               
+                               MKPlacemark* placeMark = [placemarks firstObject]; //отметина места на карте
+                               
+                               message = [placeMark.addressDictionary description];
+                           }else{
+                               message = @"No placemarks found.";
+                           }
+                       }
+                       UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location" message:message preferredStyle:UIAlertControllerStyleAlert];
+                       
+                       UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                       }];
+                       
+                       [alert addAction:ok];
+                       [self presentViewController:alert animated:YES completion:nil];
+                   }];
 }
 
 #pragma mark -  MKMapViewDelegate
@@ -132,6 +187,11 @@
         pin.canShowCallout = YES;
         pin.draggable = YES;
         pin.pinTintColor = [UIColor orangeColor];
+        
+        UIButton* descriptionButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [descriptionButton addTarget:self action:@selector(actionDescription:) forControlEvents:UIControlEventTouchUpInside];
+        
+        pin.rightCalloutAccessoryView = descriptionButton;
     }else{
         pin.annotation = annotation;
     }
