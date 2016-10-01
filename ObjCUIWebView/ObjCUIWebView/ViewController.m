@@ -89,7 +89,6 @@
     app.networkActivityIndicatorVisible = NO;
     
     [self.activitiIndicator stopAnimating];
-    
     self.backButtonItem.enabled = [self.webView canGoBack];
     self.forwardButtonItem.enabled = [self.webView canGoForward];
 
