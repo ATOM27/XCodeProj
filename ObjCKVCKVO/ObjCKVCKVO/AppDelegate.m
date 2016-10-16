@@ -23,7 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
    
-   /*
+   
     EMStudent* student = [[EMStudent alloc] init];
    
     [student addObserver:self
@@ -49,26 +49,26 @@
     NSLog(@"%@", student);
     
     self.student = student;
-   */
+   
     
-    EMStudent* student1 = [[EMStudent alloc] init];
-    student1.name = @"Alex";
-    student1.age = 20;
-    
-    EMStudent* student2 = [[EMStudent alloc] init];
-    student2.name = @"Roger";
-    student2.age = 25;
-    
-    EMStudent* student3 = [[EMStudent alloc] init];
-    student3.name = @"Jack";
-    student3.age = 22;
-    
-    EMStudent* student4 = [[EMStudent alloc] init];
-    student4.name = @"Vova";
-    student4.age = 28;
-    
-    EMGroup* group1 = [[EMGroup alloc] init];
-    group1.students = @[student1, student2, student3, student4];
+//    EMStudent* student1 = [[EMStudent alloc] init];
+//    student1.name = @"Alex";
+//    student1.age = 20;
+//    
+//    EMStudent* student2 = [[EMStudent alloc] init];
+//    student2.name = @"Roger";
+//    student2.age = 25;
+//    
+//    EMStudent* student3 = [[EMStudent alloc] init];
+//    student3.name = @"Jack";
+//    student3.age = 22;
+//    
+//    EMStudent* student4 = [[EMStudent alloc] init];
+//    student4.name = @"Vova";
+//    student4.age = 28;
+//    
+//    EMGroup* group1 = [[EMGroup alloc] init];
+//    group1.students = @[student1, student2, student3, student4];
     
     /*[group1 addObserver:self
              forKeyPath:@"students"
@@ -102,38 +102,38 @@
     } 
      */
     
-    EMStudent* student5 = [[EMStudent alloc] init];
-    student5.name = @"Vasya";
-    student5.age = 18;
-    
-    EMStudent* student6 = [[EMStudent alloc] init];
-    student6.name = @"Kolya";
-    student6.age = 24;
-    
-    EMGroup* group2 = [[EMGroup alloc] init];
-    group2.students = @[student5, student6];
-    
-    self.groups = @[group1, group2];
-    
-    NSLog(@"groups count %@", [self valueForKeyPath:@"groups.@count"]);
-    
-    NSArray* allStudents = [self.groups valueForKeyPath:@"@distinctUnionOfArrays.students"];
-    
-    NSLog(@"all students = %@", allStudents);
-    
-    NSNumber* minAge = [allStudents valueForKeyPath:@"@min.age"];
-    NSNumber* maxAge = [allStudents valueForKeyPath:@"@max.age"];
-    NSNumber* sumAge = [allStudents valueForKeyPath:@"@sum.age"];
-    NSNumber* avgAge = [allStudents valueForKeyPath:@"@avg.age"];
-    
-    NSLog(@"minAge = %@", minAge);
-    NSLog(@"maxAge = %@", maxAge);
-    NSLog(@"sumAge = %@", sumAge);
-    NSLog(@"avgAge = %@", avgAge);
-    
-    NSArray* allNames = [allStudents valueForKeyPath:@"@distinctUnionOfObjects.name"];
-    
-    NSLog(@"all names = %@", allNames);
+//    EMStudent* student5 = [[EMStudent alloc] init];
+//    student5.name = @"Vasya";
+//    student5.age = 18;
+//    
+//    EMStudent* student6 = [[EMStudent alloc] init];
+//    student6.name = @"Kolya";
+//    student6.age = 24;
+//    
+//    EMGroup* group2 = [[EMGroup alloc] init];
+//    group2.students = @[student5, student6];
+//    
+//    self.groups = @[group1, group2];
+//    
+//    NSLog(@"groups count %@", [self valueForKeyPath:@"groups.@count"]);
+//    
+//    NSArray* allStudents = [self.groups valueForKeyPath:@"@distinctUnionOfArrays.students"];
+//    
+//    NSLog(@"all students = %@", allStudents);
+//    
+//    NSNumber* minAge = [allStudents valueForKeyPath:@"@min.age"];
+//    NSNumber* maxAge = [allStudents valueForKeyPath:@"@max.age"];
+//    NSNumber* sumAge = [allStudents valueForKeyPath:@"@sum.age"];
+//    NSNumber* avgAge = [allStudents valueForKeyPath:@"@avg.age"];
+//    
+//    NSLog(@"minAge = %@", minAge);
+//    NSLog(@"maxAge = %@", maxAge);
+//    NSLog(@"sumAge = %@", sumAge);
+//    NSLog(@"avgAge = %@", avgAge);
+//    
+//    NSArray* allNames = [allStudents valueForKeyPath:@"@distinctUnionOfObjects.name"];
+//    
+//    NSLog(@"all names = %@", allNames);
     
     return YES;
 }
