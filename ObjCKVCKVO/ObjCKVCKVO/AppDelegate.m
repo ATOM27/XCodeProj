@@ -51,10 +51,10 @@
     self.student = student;
    
     
-//    EMStudent* student1 = [[EMStudent alloc] init];
-//    student1.name = @"Alex";
-//    student1.age = 20;
-//    
+    EMStudent* student1 = [[EMStudent alloc] init];
+    student1.name = @"Alex";
+    student1.age = 20;
+//
 //    EMStudent* student2 = [[EMStudent alloc] init];
 //    student2.name = @"Roger";
 //    student2.age = 25;
@@ -87,7 +87,7 @@
      
      */
  
-    /*
+   // /*
     self.student = student1;
     
     NSLog(@"Student1 name = %@", [self valueForKeyPath:@"student.name"]);
@@ -100,7 +100,7 @@
     if (![self.student validateValue:&name forKey:@"name" error:&error]){
         NSLog(@"%@", error);
     } 
-     */
+     //*/
     
 //    EMStudent* student5 = [[EMStudent alloc] init];
 //    student5.name = @"Vasya";
@@ -134,7 +134,7 @@
 //    NSArray* allNames = [allStudents valueForKeyPath:@"@distinctUnionOfObjects.name"];
 //    
 //    NSLog(@"all names = %@", allNames);
-    
+    [student removeObserver:self forKeyPath:@"name" context:nil];
     return YES;
 }
 
