@@ -15,10 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<EMStudent *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSDate *dateOfBirth;
 @property (nullable, nonatomic, copy) NSString *firstName;
 @property (nullable, nonatomic, copy) NSString *lastName;
 @property (nonatomic) double score;
-@property (nullable, nonatomic, copy) NSDate *dateOfBirth;
+@property (nullable, nonatomic, retain) EMCar *car;
+@property (nullable, nonatomic, retain) EMUniversity *university;
 
 @end
 

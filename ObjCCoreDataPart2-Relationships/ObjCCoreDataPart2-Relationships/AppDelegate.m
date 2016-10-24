@@ -8,12 +8,18 @@
 
 #import "AppDelegate.h"
 #import "EMStudent+CoreDataClass.h"
+#import "EMCar+CoreDataClass.h"
+#import "EMUniversity+CoreDataClass.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+static NSString* carModelNames[] = {
+    @"Doodge", @"Toyota", @"BMW", @"Lada", @"Volga"
+};
 
 -(EMStudent*) addStudent {
     //This method show how to work with object of model's class
@@ -28,10 +34,28 @@
     return student;
 }
 
--(NSArray*) allObjects {
-    NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"EMStudent"];// we are creating a query in SQL
+-(EMCar*) addCar {
+    //This method show how to work with object of model's class
+    EMCar* car = [NSEntityDescription insertNewObjectForEntityForName:@"EMCar"
+                                                       inManagedObjectContext:self.persistentContainer.viewContext];
     
-    NSEntityDescription* description = [NSEntityDescription entityForName:@"EMStudent"
+    car.model = carModelNames[arc4random_uniform(5)];
+    return car;
+}
+
+-(EMUniversity*) addUniversity {
+    //This method show how to work with object of model's class
+    EMUniversity* university = [NSEntityDescription insertNewObjectForEntityForName:@"EMUniversity"
+                                               inManagedObjectContext:self.persistentContainer.viewContext];
+    
+    university.name = @"KPI";
+    return university;
+}
+
+-(NSArray*) allObjects {
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];// we are creating a query in SQL
+    
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"EMObject"
                                                    inManagedObjectContext:self.persistentContainer.viewContext];
     
     [request setEntity:description];
@@ -47,8 +71,24 @@
     
     NSArray* allObjest = [self allObjects];
     
-    for (EMStudent* object in allObjest){
-        NSLog(@"%@ %@ - %.2f", object.firstName, object.lastName, object.score);
+    for (id object in allObjest){
+        
+        if ([object isKindOfClass:[EMCar class]]){
+            
+            EMCar* car = (EMCar*) object;
+            NSLog(@"CAR: %@, OWNER: %@ %@", car.model, car.owner.firstName, car.owner.lastName);
+            
+        } else if ([object isKindOfClass:[EMStudent class]]){
+            
+            EMStudent* student = (EMStudent*) object;
+            NSLog(@"STUDENT: %@ %@, CAR: %@, UNIVERSITY: %@", student.firstName, student.lastName, student.car.model, student.university.name);
+            
+        }else if ([object isKindOfClass:[EMUniversity class]]){
+            
+            EMUniversity* university = (EMUniversity*) object;
+            NSLog(@"UNIVERSITY: %@, STUENTS: %lu", university.name, [university.students count]);
+            
+        }
     }
 }
 
@@ -56,10 +96,10 @@
     
     NSArray* allObjest = [self allObjects];
     
-    for (EMStudent* object in allObjest){
+    for (id object in allObjest){
         [self.persistentContainer.viewContext deleteObject:object];
     }
-    
+
     NSError* error = nil;
     if (![self.persistentContainer.viewContext save:&error]){
         NSLog(@"%@", [error localizedDescription]);
@@ -71,30 +111,53 @@
     // Override point for customization after application launch.
     
     NSError* error = nil;
-    EMStudent* stud = [self addStudent];
-    if (![stud.managedObjectContext save:&error]){ // inside there is validating too. See code in CoreDataProreties
+
+    EMUniversity* university = [self addUniversity];
+    
+    for (int i = 0; i < 30; i++){
+        
+        EMStudent* s1 = [self addStudent];
+        
+        if (arc4random_uniform(1000) < 500){
+            EMCar* c1 = [self addCar];
+            s1.car = c1;// with help of inverse we don't need to define car's owner because it's already done;
+        }
+        
+        s1.university = university;// the same as below
+        //[university addStudentsObject:s1];
+    }
+    
+    
+    if (![self.persistentContainer.viewContext save:&error]){
         NSLog(@"%@", error);
     }
     
-    NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"EMStudent"];// we are creating a query in SQL
+    [self printAllObjects];
+    /// DELETING
     
-    NSEntityDescription* description = [NSEntityDescription entityForName:@"EMStudent"
-                                                   inManagedObjectContext:self.persistentContainer.viewContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];// we are creating a query in SQL
+    
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"EMStudent"//EMUniversity
+                                                   inManagedObjectContext:self.persistentContainer.viewContext];// If we are delete car, student will not delete because car's owner delete rule is Nullify
     
     [request setEntity:description];
     //[request setResultType:NSDictionaryResultType];// then the execute will return NSDictionary!!!
     
     NSArray* resultArray = [self.persistentContainer.viewContext executeFetchRequest:request error:nil];
-    NSLog(@"%@", resultArray);
-
-    for (EMStudent* object in resultArray){
-        NSLog(@"%@ %@", object.firstName, object.lastName);
-        
-        [self.persistentContainer.viewContext deleteObject:object];// we are checking objects for deleting, but not delete them now. It is delete it when we save context.
+    
+    if ([resultArray count] > 0){
+        EMStudent* stud = [resultArray firstObject];
+        [self.persistentContainer.viewContext deleteObject:stud];
+        //EMUniversity* univ = [resultArray firstObject];
+        //[self.persistentContainer.viewContext deleteObject:univ];
     }
     
-    [self.persistentContainer.viewContext save:nil];//save context out of the loop. It is more faster then if we are making it in the loop.
+    if (![self.persistentContainer.viewContext save:&error]){
+        NSLog(@"%@", error);
+    }
     
+    [self printAllObjects];
+    /// END DELETING
     return YES;
 }
 

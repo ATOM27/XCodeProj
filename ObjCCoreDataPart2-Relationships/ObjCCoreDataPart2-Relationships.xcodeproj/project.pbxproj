@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D65A15131DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A15041DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.m */; };
+		D65A15141DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A15061DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.m */; };
+		D65A15151DBE3B6E0089BFBE /* EMStudent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A15081DBE3B6E0089BFBE /* EMStudent+CoreDataClass.m */; };
+		D65A15161DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A150A1DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.m */; };
+		D65A15171DBE3B6E0089BFBE /* EMCar+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A150C1DBE3B6E0089BFBE /* EMCar+CoreDataClass.m */; };
+		D65A15181DBE3B6E0089BFBE /* EMCar+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A150E1DBE3B6E0089BFBE /* EMCar+CoreDataProperties.m */; };
+		D65A15191DBE3B6E0089BFBE /* EMObject+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A15101DBE3B6E0089BFBE /* EMObject+CoreDataClass.m */; };
+		D65A151A1DBE3B6E0089BFBE /* EMObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A15121DBE3B6E0089BFBE /* EMObject+CoreDataProperties.m */; };
 		D6D889AF1DBD6BC300974A26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889AE1DBD6BC300974A26 /* main.m */; };
 		D6D889B21DBD6BC300974A26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889B11DBD6BC300974A26 /* AppDelegate.m */; };
 		D6D889B51DBD6BC300974A26 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889B41DBD6BC300974A26 /* ViewController.m */; };
@@ -16,8 +24,6 @@
 		D6D889C01DBD6BC300974A26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D889BE1DBD6BC300974A26 /* LaunchScreen.storyboard */; };
 		D6D889CB1DBD6BC300974A26 /* ObjCCoreDataPart2_RelationshipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889CA1DBD6BC300974A26 /* ObjCCoreDataPart2_RelationshipsTests.m */; };
 		D6D889D61DBD6BC300974A26 /* ObjCCoreDataPart2_RelationshipsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889D51DBD6BC300974A26 /* ObjCCoreDataPart2_RelationshipsUITests.m */; };
-		D6D889EE1DBD6CC100974A26 /* EMStudent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889EB1DBD6CC100974A26 /* EMStudent+CoreDataClass.m */; };
-		D6D889EF1DBD6CC100974A26 /* EMStudent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D889ED1DBD6CC100974A26 /* EMStudent+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D65A15031DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMUniversity+CoreDataClass.h"; sourceTree = "<group>"; };
+		D65A15041DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMUniversity+CoreDataClass.m"; sourceTree = "<group>"; };
+		D65A15051DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMUniversity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D65A15061DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMUniversity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D65A15071DBE3B6E0089BFBE /* EMStudent+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMStudent+CoreDataClass.h"; sourceTree = "<group>"; };
+		D65A15081DBE3B6E0089BFBE /* EMStudent+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMStudent+CoreDataClass.m"; sourceTree = "<group>"; };
+		D65A15091DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMStudent+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D65A150A1DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMStudent+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D65A150B1DBE3B6E0089BFBE /* EMCar+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCar+CoreDataClass.h"; sourceTree = "<group>"; };
+		D65A150C1DBE3B6E0089BFBE /* EMCar+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCar+CoreDataClass.m"; sourceTree = "<group>"; };
+		D65A150D1DBE3B6E0089BFBE /* EMCar+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCar+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D65A150E1DBE3B6E0089BFBE /* EMCar+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCar+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D65A150F1DBE3B6E0089BFBE /* EMObject+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMObject+CoreDataClass.h"; sourceTree = "<group>"; };
+		D65A15101DBE3B6E0089BFBE /* EMObject+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMObject+CoreDataClass.m"; sourceTree = "<group>"; };
+		D65A15111DBE3B6E0089BFBE /* EMObject+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMObject+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D65A15121DBE3B6E0089BFBE /* EMObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMObject+CoreDataProperties.m"; sourceTree = "<group>"; };
 		D6D889AA1DBD6BC300974A26 /* ObjCCoreDataPart2-Relationships.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjCCoreDataPart2-Relationships.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D889AE1DBD6BC300974A26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6D889B01DBD6BC300974A26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,10 +77,6 @@
 		D6D889D11DBD6BC300974A26 /* ObjCCoreDataPart2-RelationshipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjCCoreDataPart2-RelationshipsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D889D51DBD6BC300974A26 /* ObjCCoreDataPart2_RelationshipsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCCoreDataPart2_RelationshipsUITests.m; sourceTree = "<group>"; };
 		D6D889D71DBD6BC300974A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D6D889EA1DBD6CC100974A26 /* EMStudent+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMStudent+CoreDataClass.h"; sourceTree = "<group>"; };
-		D6D889EB1DBD6CC100974A26 /* EMStudent+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMStudent+CoreDataClass.m"; sourceTree = "<group>"; };
-		D6D889EC1DBD6CC100974A26 /* EMStudent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMStudent+CoreDataProperties.h"; sourceTree = "<group>"; };
-		D6D889ED1DBD6CC100974A26 /* EMStudent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMStudent+CoreDataProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +104,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D65A151B1DBE3B810089BFBE /* University */ = {
+			isa = PBXGroup;
+			children = (
+				D65A15031DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.h */,
+				D65A15041DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.m */,
+				D65A15051DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.h */,
+				D65A15061DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.m */,
+			);
+			name = University;
+			sourceTree = "<group>";
+		};
+		D65A151C1DBE3B8D0089BFBE /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				D65A15071DBE3B6E0089BFBE /* EMStudent+CoreDataClass.h */,
+				D65A15081DBE3B6E0089BFBE /* EMStudent+CoreDataClass.m */,
+				D65A15091DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.h */,
+				D65A150A1DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.m */,
+			);
+			name = Student;
+			sourceTree = "<group>";
+		};
+		D65A151D1DBE3B960089BFBE /* Car */ = {
+			isa = PBXGroup;
+			children = (
+				D65A150B1DBE3B6E0089BFBE /* EMCar+CoreDataClass.h */,
+				D65A150C1DBE3B6E0089BFBE /* EMCar+CoreDataClass.m */,
+				D65A150D1DBE3B6E0089BFBE /* EMCar+CoreDataProperties.h */,
+				D65A150E1DBE3B6E0089BFBE /* EMCar+CoreDataProperties.m */,
+			);
+			name = Car;
+			sourceTree = "<group>";
+		};
+		D65A151E1DBE3B9F0089BFBE /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				D65A150F1DBE3B6E0089BFBE /* EMObject+CoreDataClass.h */,
+				D65A15101DBE3B6E0089BFBE /* EMObject+CoreDataClass.m */,
+				D65A15111DBE3B6E0089BFBE /* EMObject+CoreDataProperties.h */,
+				D65A15121DBE3B6E0089BFBE /* EMObject+CoreDataProperties.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
 		D6D889A11DBD6BC300974A26 = {
 			isa = PBXGroup;
 			children = (
@@ -153,10 +215,10 @@
 		D6D889E91DBD6C4300974A26 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D6D889EA1DBD6CC100974A26 /* EMStudent+CoreDataClass.h */,
-				D6D889EB1DBD6CC100974A26 /* EMStudent+CoreDataClass.m */,
-				D6D889EC1DBD6CC100974A26 /* EMStudent+CoreDataProperties.h */,
-				D6D889ED1DBD6CC100974A26 /* EMStudent+CoreDataProperties.m */,
+				D65A151B1DBE3B810089BFBE /* University */,
+				D65A151C1DBE3B8D0089BFBE /* Student */,
+				D65A151D1DBE3B960089BFBE /* Car */,
+				D65A151E1DBE3B9F0089BFBE /* Object */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -294,11 +356,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D65A151A1DBE3B6E0089BFBE /* EMObject+CoreDataProperties.m in Sources */,
+				D65A15131DBE3B6E0089BFBE /* EMUniversity+CoreDataClass.m in Sources */,
+				D65A15151DBE3B6E0089BFBE /* EMStudent+CoreDataClass.m in Sources */,
+				D65A15181DBE3B6E0089BFBE /* EMCar+CoreDataProperties.m in Sources */,
+				D65A15191DBE3B6E0089BFBE /* EMObject+CoreDataClass.m in Sources */,
+				D65A15141DBE3B6E0089BFBE /* EMUniversity+CoreDataProperties.m in Sources */,
 				D6D889B51DBD6BC300974A26 /* ViewController.m in Sources */,
-				D6D889EF1DBD6CC100974A26 /* EMStudent+CoreDataProperties.m in Sources */,
 				D6D889B21DBD6BC300974A26 /* AppDelegate.m in Sources */,
+				D65A15161DBE3B6E0089BFBE /* EMStudent+CoreDataProperties.m in Sources */,
 				D6D889BB1DBD6BC300974A26 /* ObjCCoreDataPart2_Relationships.xcdatamodeld in Sources */,
-				D6D889EE1DBD6CC100974A26 /* EMStudent+CoreDataClass.m in Sources */,
+				D65A15171DBE3B6E0089BFBE /* EMCar+CoreDataClass.m in Sources */,
 				D6D889AF1DBD6BC300974A26 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +599,7 @@
 				D6D889DC1DBD6BC400974A26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6D889DD1DBD6BC400974A26 /* Build configuration list for PBXNativeTarget "ObjCCoreDataPart2-RelationshipsTests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +608,7 @@
 				D6D889DF1DBD6BC400974A26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6D889E01DBD6BC400974A26 /* Build configuration list for PBXNativeTarget "ObjCCoreDataPart2-RelationshipsUITests" */ = {
 			isa = XCConfigurationList;
@@ -547,6 +617,7 @@
 				D6D889E21DBD6BC400974A26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

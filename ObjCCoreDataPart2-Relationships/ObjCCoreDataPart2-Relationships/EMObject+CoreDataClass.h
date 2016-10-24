@@ -1,5 +1,5 @@
 //
-//  EMStudent+CoreDataClass.h
+//  EMObject+CoreDataClass.h
 //  ObjCCoreDataPart2-Relationships
 //
 //  Created by Eugene Mekhedov on 24.10.16.
@@ -7,16 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EMObject+CoreDataClass.h"
-
-@class EMCar, EMUniversity;
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EMStudent : EMObject
+@interface EMObject : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "EMStudent+CoreDataProperties.h"
+#import "EMObject+CoreDataProperties.h"
