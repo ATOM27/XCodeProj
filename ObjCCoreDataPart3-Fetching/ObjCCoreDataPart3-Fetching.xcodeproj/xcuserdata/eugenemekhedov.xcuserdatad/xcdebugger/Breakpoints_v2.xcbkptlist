@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUITableViewEditingDZ/EMViewController.m"
-            timestampString = "493245222.417901"
+            filePath = "ObjCCoreDataPart2-Relationships/AppDelegate.m"
+            timestampString = "499242964.92078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "-numberOfSectionsInTableView:"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUITableViewEditingDZ/EMViewController.m"
-            timestampString = "493245222.417901"
+            filePath = "ObjCCoreDataPart2-Relationships/AppDelegate.m"
+            timestampString = "499445678.540235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUITableViewEditingDZ/EMViewController.m"
-            timestampString = "493245222.417901"
+            filePath = "ObjCCoreDataPart2-Relationships/AppDelegate.m"
+            timestampString = "499445678.540235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ObjCUITableViewEditingDZ/EMViewController.m"
-            timestampString = "493245222.417901"
+            filePath = "ObjCCoreDataPart2-Relationships/AppDelegate.m"
+            timestampString = "499252027.554819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
