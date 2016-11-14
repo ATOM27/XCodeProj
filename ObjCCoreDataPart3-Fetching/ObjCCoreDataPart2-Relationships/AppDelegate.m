@@ -200,7 +200,7 @@ static NSString* carModelNames[] = {
     
     NSArray* validNames = @[@"Mark"];
     
-    //NSPredicate* predicate = [NSPredicate predicateWithFormat:@"score > %f AND courses.@count >= 3 AND firstName IN %@", 3.0, validNames];// NSPredicate it's like conditions(условия) in SQL. We can use "&&" instead "AND". This is operate for all operators.
+    //NSPredicate* predicate = [NSPredicate predicateWithFormat:@"score > %f AND courses.@count >= 3 AND firstName IN %@", 3.0, validNames];// NSPredicate it's like conditions in SQL. We can use "&&" instead "AND". This is operate for all operators.
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"@avg.students.score > %f", 3.0];
     

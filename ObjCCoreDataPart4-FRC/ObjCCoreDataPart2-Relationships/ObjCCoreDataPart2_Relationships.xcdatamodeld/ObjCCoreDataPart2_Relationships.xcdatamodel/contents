@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1108" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="EMCar" representedClassName="EMCar" parentEntity="EMObject" syncable="YES">
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EMStudent" inverseName="car" inverseEntity="EMStudent" syncable="YES"/>
+    </entity>
+    <entity name="EMCourse" representedClassName="EMCourse" parentEntity="EMObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EMStudent" inverseName="courses" inverseEntity="EMStudent" syncable="YES"/>
+        <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EMUniversity" inverseName="courses" inverseEntity="EMUniversity" syncable="YES"/>
+        <fetchedProperty name="bestStudents" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="EMStudent" predicateString="score &gt; 3.0"/>
+        </fetchedProperty>
+        <fetchedProperty name="studentsWithManyCourses" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="EMStudent" predicateString="courses.@count &gt;= 2"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="EMObject" representedClassName="EMObject" syncable="YES"/>
+    <entity name="EMStudent" representedClassName="EMStudent" parentEntity="EMObject" syncable="YES">
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="car" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EMCar" inverseName="owner" inverseEntity="EMCar" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EMCourse" inverseName="students" inverseEntity="EMCourse" syncable="YES"/>
+        <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EMUniversity" inverseName="students" inverseEntity="EMUniversity" syncable="YES"/>
+    </entity>
+    <entity name="EMUniversity" representedClassName="EMUniversity" parentEntity="EMObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMCourse" inverseName="university" inverseEntity="EMCourse" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EMStudent" inverseName="university" inverseEntity="EMStudent" syncable="YES"/>
+    </entity>
+    <fetchRequest name="FetchStudents" entity="EMStudent" predicateString="score &gt; 3 AND score &lt;= 3.5"/>
+    <elements>
+        <element name="EMCar" positionX="171" positionY="27" width="128" height="73"/>
+        <element name="EMCourse" positionX="-326" positionY="180" width="128" height="131"/>
+        <element name="EMObject" positionX="-65" positionY="-171" width="128" height="43"/>
+        <element name="EMStudent" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="EMUniversity" positionX="-522" positionY="-27" width="128" height="88"/>
+    </elements>
+</model>
