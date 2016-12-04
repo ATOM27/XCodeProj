@@ -142,7 +142,7 @@ static NSString* carModelNames[] = {
 -(void) generateAndAddUniversity{
     
     NSError* error = nil;
-    /*
+   // /*
      [self deleteAllObjects];
      
      NSArray* courses = @[[self addCourseWithName:@"iOS"],
@@ -185,9 +185,9 @@ static NSString* carModelNames[] = {
      }
      
      [self printAllObjects];
-     */
+    // */
     
-    
+    /*
     NSFetchRequest* request = [[NSFetchRequest alloc] init];// we are creating a query in SQL
     
     NSEntityDescription* description = [NSEntityDescription entityForName:@"EMStudent"//EMUniversity
@@ -270,7 +270,7 @@ static NSString* carModelNames[] = {
     
     NSLog(@"------------------------------------");
     [self printArray:resultArray];
-    
+    */
 }
 
 

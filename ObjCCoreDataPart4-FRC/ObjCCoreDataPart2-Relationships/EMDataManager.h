@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class EMUniversity;
 @interface EMDataManager : NSObject
 
 +(EMDataManager*) sharedManager;
@@ -18,4 +19,7 @@
 - (void)saveContext;
 
 -(void) generateAndAddUniversity;
+-(NSArray*) allObjects;
+-(void) printArray:(NSArray*) array;
+
 @end

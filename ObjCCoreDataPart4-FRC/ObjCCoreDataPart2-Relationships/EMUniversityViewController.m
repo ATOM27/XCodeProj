@@ -9,6 +9,7 @@
 #import "EMUniversityViewController.h"
 #import "EMUniversity+CoreDataProperties.h"
 #import "EMCourseViewController.h"
+#import "EMDataManager.h"
 
 @interface EMUniversityViewController ()
 
@@ -23,8 +24,16 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"Universities";
+    
+    UIBarButtonItem* barBItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(actionBegin:)];
+    
+    self.navigationItem.rightBarButtonItem = barBItem;
+    
+    
 }
-
+-(void)actionBegin:(id)sender{
+    [self.viewContext save:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

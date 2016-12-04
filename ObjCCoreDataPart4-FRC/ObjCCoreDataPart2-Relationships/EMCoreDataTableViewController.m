@@ -19,7 +19,6 @@
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        
     }
     return self;
 }
@@ -78,11 +77,6 @@
             //abort();
         }
     }
-}
-
-
-- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath*) indexPath {
-
 }
 
 

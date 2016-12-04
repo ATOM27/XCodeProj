@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G1108" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="EMObject" representedClassName="EMObject" syncable="YES"/>
+    <entity name="EMUsers" representedClassName="EMUsers" parentEntity="EMObject" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EMUsers" positionX="-45" positionY="0" width="128" height="88"/>
+        <element name="EMObject" positionX="-47" positionY="-115" width="128" height="43"/>
+    </elements>
+</model>

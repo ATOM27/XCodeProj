@@ -29,6 +29,9 @@
     
     self.window.rootViewController = nav;
     
+    NSArray* arr = [[EMDataManager sharedManager] allObjects];
+    [[EMDataManager sharedManager] printArray:arr];
+    
     return YES;
 }
 
