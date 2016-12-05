@@ -50,9 +50,8 @@ typedef NS_ENUM(NSInteger, EMTextFieldType){
 
 #pragma mark - Actions
 - (IBAction)actionAddUser:(id)sender {
-    
     BOOL isItOk = YES;
-    
+
     for (UITextField* field in self.addUserTextField){
         
         if ([field.text length] == 0){
@@ -68,7 +67,6 @@ typedef NS_ENUM(NSInteger, EMTextFieldType){
             break;
         }
     }
-    
     if (isItOk){
         
         [[EMDataManager sharedManager] addUserWithName:[[self.addUserTextField objectAtIndex:EMTextFieldTypeName] text]

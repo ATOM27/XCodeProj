@@ -9,6 +9,14 @@
 #import "EMUsersViewController.h"
 #import "EMUsers+CoreDataProperties.h"
 #import "EMDataManager.h"
+#import "EMAddUserTableViewController.h"
+#import "EMUpdateTableViewController.h"
+
+typedef NS_ENUM(NSInteger, EMTextFieldType){
+    EMTextFieldTypeName,
+    EMTextFieldTypeLastName,
+    EMTextFieldTypeEmail
+};
 
 @interface EMUsersViewController ()
 
@@ -79,20 +87,23 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     cell.detailTextLabel.text = user.email;
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    EMUniversity* university = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    
-//    EMCourseViewController* vc = [[EMCourseViewController alloc] init];
-//    
-//    vc.university = university;
-//    
-//    [self.navigationController pushViewController:vc animated:YES];
+    EMUpdateTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"EMUpdateTableViewController"];
+    
+    EMUsers* user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    vc.firstNameString = user.firstName;
+    vc.lastNameString = user.lastName;
+    vc.emailString = user.email;
+    vc.user = user;
+    
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 @end

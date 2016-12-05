@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EMUsers+CoreDataProperties.h"
 
 @interface EMAddUserTableViewController : UITableViewController
 

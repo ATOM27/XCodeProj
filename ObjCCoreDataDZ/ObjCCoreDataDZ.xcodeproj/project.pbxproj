@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D61729941DF60489003C2F5E /* EMUpdateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D61729931DF60489003C2F5E /* EMUpdateTableViewController.m */; };
+		D61729971DF614E2003C2F5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61729951DF614E2003C2F5E /* Main.storyboard */; };
 		D66F7C411DE44BF2001332BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F7C401DE44BF2001332BC /* main.m */; };
 		D66F7C441DE44BF2001332BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F7C431DE44BF2001332BC /* AppDelegate.m */; };
-		D66F7C4A1DE44BF2001332BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D66F7C481DE44BF2001332BC /* Main.storyboard */; };
 		D66F7C4D1DE44BF2001332BC /* ObjCCoreDataDZ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D66F7C4B1DE44BF2001332BC /* ObjCCoreDataDZ.xcdatamodeld */; };
 		D66F7C4F1DE44BF2001332BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D66F7C4E1DE44BF2001332BC /* Assets.xcassets */; };
 		D66F7C521DE44BF2001332BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D66F7C501DE44BF2001332BC /* LaunchScreen.storyboard */; };
@@ -43,11 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D61729921DF60489003C2F5E /* EMUpdateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMUpdateTableViewController.h; sourceTree = "<group>"; };
+		D61729931DF60489003C2F5E /* EMUpdateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMUpdateTableViewController.m; sourceTree = "<group>"; };
+		D61729961DF614E2003C2F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D66F7C3C1DE44BF2001332BC /* ObjCCoreDataDZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCCoreDataDZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D66F7C401DE44BF2001332BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D66F7C421DE44BF2001332BC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D66F7C431DE44BF2001332BC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D66F7C491DE44BF2001332BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D66F7C4C1DE44BF2001332BC /* ObjCCoreDataDZ.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjCCoreDataDZ.xcdatamodel; sourceTree = "<group>"; };
 		D66F7C4E1DE44BF2001332BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D66F7C511DE44BF2001332BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -135,7 +138,9 @@
 				D66F7C8B1DE44CDB001332BC /* EMUsersViewController.m */,
 				D6B043401DF4BE72007A5925 /* EMAddUserTableViewController.h */,
 				D6B043411DF4BE72007A5925 /* EMAddUserTableViewController.m */,
-				D66F7C481DE44BF2001332BC /* Main.storyboard */,
+				D61729921DF60489003C2F5E /* EMUpdateTableViewController.h */,
+				D61729931DF60489003C2F5E /* EMUpdateTableViewController.m */,
+				D61729951DF614E2003C2F5E /* Main.storyboard */,
 				D66F7C4E1DE44BF2001332BC /* Assets.xcassets */,
 				D66F7C501DE44BF2001332BC /* LaunchScreen.storyboard */,
 				D66F7C531DE44BF2001332BC /* Info.plist */,
@@ -301,9 +306,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D61729971DF614E2003C2F5E /* Main.storyboard in Resources */,
 				D66F7C521DE44BF2001332BC /* LaunchScreen.storyboard in Resources */,
 				D66F7C4F1DE44BF2001332BC /* Assets.xcassets in Resources */,
-				D66F7C4A1DE44BF2001332BC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D61729941DF60489003C2F5E /* EMUpdateTableViewController.m in Sources */,
 				D66F7CB11DE44F94001332BC /* EMObject+CoreDataClass.m in Sources */,
 				D6B043421DF4BE72007A5925 /* EMAddUserTableViewController.m in Sources */,
 				D66F7C441DE44BF2001332BC /* AppDelegate.m in Sources */,
@@ -374,10 +380,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D66F7C481DE44BF2001332BC /* Main.storyboard */ = {
+		D61729951DF614E2003C2F5E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D66F7C491DE44BF2001332BC /* Base */,
+				D61729961DF614E2003C2F5E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
