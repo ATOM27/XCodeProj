@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *addUserTextField;
 
 - (IBAction)actionAddUser:(id)sender;
+- (IBAction)actionCansel:(UIButton *)sender;
 @end

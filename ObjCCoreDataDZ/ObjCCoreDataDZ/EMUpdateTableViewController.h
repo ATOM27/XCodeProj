@@ -22,5 +22,6 @@
 
 @property (strong, nonatomic) EMUsers* user;
 - (IBAction)actionUpdate:(UIButton *)sender;
+- (IBAction)actionCansel:(UIButton *)sender;
 
 @end

@@ -76,4 +76,8 @@ typedef NS_ENUM(NSInteger, EMTextFieldType){
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
+- (IBAction)actionCansel:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

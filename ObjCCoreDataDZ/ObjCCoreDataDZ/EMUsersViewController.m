@@ -88,6 +88,7 @@ typedef NS_ENUM(NSInteger, EMTextFieldType){
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     cell.detailTextLabel.text = user.email;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
 }
 
 #pragma mark - UITableViewDelegate

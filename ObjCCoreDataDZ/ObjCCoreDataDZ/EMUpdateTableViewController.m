@@ -90,13 +90,16 @@
 */
 #pragma mark - Action
 - (IBAction)actionUpdate:(UIButton *)sender {
-    
     self.user.firstName = self.firstName.text;
     self.user.lastName = self.lastName.text;
     self.user.email = self.email.text;
     
     [[[[EMDataManager sharedManager] persistentContainer] viewContext] save:nil];
     
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)actionCansel:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
