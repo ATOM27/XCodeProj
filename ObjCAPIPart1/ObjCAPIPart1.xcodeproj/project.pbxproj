@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60F11D01E05FF5500A6072D /* EMFriendInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D60F11CF1E05FF5500A6072D /* EMFriendInfoTableViewController.m */; };
 		D62BA41D1E005940008AB487 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA3FC1E005940008AB487 /* AFHTTPSessionManager.m */; };
 		D62BA41E1E005940008AB487 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA3FF1E005940008AB487 /* AFNetworkReachabilityManager.m */; };
 		D62BA41F1E005940008AB487 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA4011E005940008AB487 /* AFSecurityPolicy.m */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D60F11CE1E05FF5500A6072D /* EMFriendInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMFriendInfoTableViewController.h; sourceTree = "<group>"; };
+		D60F11CF1E05FF5500A6072D /* EMFriendInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMFriendInfoTableViewController.m; sourceTree = "<group>"; };
 		D62BA3FB1E005940008AB487 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		D62BA3FC1E005940008AB487 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		D62BA3FD1E005940008AB487 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 				D6BBADD01E00507400F5281B /* AppDelegate.m */,
 				D6BBADD21E00507400F5281B /* ViewController.h */,
 				D6BBADD31E00507400F5281B /* ViewController.m */,
+				D60F11CE1E05FF5500A6072D /* EMFriendInfoTableViewController.h */,
+				D60F11CF1E05FF5500A6072D /* EMFriendInfoTableViewController.m */,
 				D62BA42C1E005A15008AB487 /* EMServerManager.h */,
 				D62BA42D1E005A15008AB487 /* EMServerManager.m */,
 				D6BBADD51E00507400F5281B /* Main.storyboard */,
@@ -416,6 +421,7 @@
 				D62BA4281E005940008AB487 /* UIImageView+AFNetworking.m in Sources */,
 				D62BA4271E005940008AB487 /* UIButton+AFNetworking.m in Sources */,
 				D62BA42A1E005940008AB487 /* UIRefreshControl+AFNetworking.m in Sources */,
+				D60F11D01E05FF5500A6072D /* EMFriendInfoTableViewController.m in Sources */,
 				D62BA42B1E005940008AB487 /* UIWebView+AFNetworking.m in Sources */,
 				D62BA4201E005940008AB487 /* AFURLRequestSerialization.m in Sources */,
 				D62BA4231E005940008AB487 /* AFAutoPurgingImageCache.m in Sources */,

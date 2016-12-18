@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import "EMUser.h"
 @interface EMServerManager : NSObject
 
 @property (strong,nonatomic) AFHTTPSessionManager *manager;
@@ -18,5 +19,9 @@
                        count:(NSInteger) count
                    onSiccess:(void(^)(NSArray* friends)) success
                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+-(void) getUserInfoWithID:(NSString*)uid
+                onSuccess:(void(^)(EMUser* user)) success
+                onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 @end

@@ -10,10 +10,12 @@
 #import "EMServerManager.h"
 #import "EMUser.h"
 #import "UIImageView+AFNetworking.h"
+#import "EMFriendInfoTableViewController.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) NSMutableArray* friendsArray;
+@property (strong, nonatomic) EMUser* selectedUser;
 
 @end
 
@@ -85,12 +87,15 @@ static NSInteger friendsInRequest = 20;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.textColor = [UIColor blueColor];
         cell.imageView.image = nil;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
     
     }else{
         
         EMUser* friend = [self.friendsArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         NSURLRequest* request = [NSURLRequest requestWithURL:friend.imageURL];
         
@@ -104,7 +109,6 @@ static NSInteger friendsInRequest = 20;
                                            [weakCell layoutSubviews];
                                            
                                        } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-                                           
                                        }];
     }
     return cell;
@@ -119,9 +123,27 @@ static NSInteger friendsInRequest = 20;
     if (indexPath.row == [self.friendsArray count]){
         
         [self getFriendsFromServer];
+        
+    }else{
+        self.selectedUser = [self.friendsArray objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"FriendInfoIdentifier" sender:nil];
     }
 }
 
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    [[EMServerManager sharedManager] getUserInfoWithID:self.selectedUser.ident
+                                             onSuccess:^(EMUser *user) {
+                                                 
+                                                 EMFriendInfoTableViewController* vc = segue.destinationViewController;
+                                                 [vc setUser:user];
+                                                 
+                                             } onFailure:^(NSError *error, NSInteger statusCode) {
+                                                 NSLog(@"Error =%@ code = %ld",[error localizedDescription], (long)statusCode);
+                                             }];
+}
 
 
 @end

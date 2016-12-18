@@ -10,13 +10,14 @@
 
 @implementation EMUser
 
--(id) initWithServerResponse:(NSDictionary*) responseObject;
-
-{
+-(id) initWithServerResponseFriend:(NSDictionary*) responseObject{
     self = [super init];
     if (self) {
         self.firstName = [responseObject objectForKey:@"first_name"];
         self.lastName = [responseObject objectForKey:@"last_name"];
+        self.ident = [responseObject objectForKey:@"user_id"];
+        
+        self.status = nil;
         
         NSString* URLString = [responseObject objectForKey:@"photo_50"];
         
@@ -24,6 +25,25 @@
             self.imageURL = [NSURL URLWithString:URLString];
         }
 
+    }
+    return self;
+}
+
+-(id) initWithServerResponseUser:(NSDictionary*) responseObject{
+    self = [super init];
+    if (self) {
+        self.firstName = [responseObject objectForKey:@"first_name"];
+        self.lastName = [responseObject objectForKey:@"last_name"];
+        self.ident = [responseObject objectForKey:@"uid"];
+        
+            self.status = [responseObject objectForKey:@"status"];
+        
+        NSString* URLString = [responseObject objectForKey:@"photo_100"];
+        
+        if (URLString){
+            self.imageURL = [NSURL URLWithString:URLString];
+        }
+        
     }
     return self;
 }

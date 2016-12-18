@@ -46,14 +46,14 @@
                                  @"order": @"name",
                                  @"count":@(count),
                                  @"offset":@(offset),
-                                 @"fields":@[@"photo_50", @"online"],
+                                 @"fields":@[@"photo_50"],
                                  @"name_case": @"nom"};
     
     [self.manager GET:URLString
            parameters:parameters
              progress:nil
               success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+       // NSLog(@"JSON: %@", responseObject);
                   
                   NSArray* friendsArray = [responseObject objectForKey:@"response"];
                   
@@ -61,7 +61,7 @@
                   
                   for (NSDictionary* dict in friendsArray){
                       
-                      EMUser* user = [[EMUser alloc] initWithServerResponse:dict];
+                      EMUser* user = [[EMUser alloc] initWithServerResponseFriend:dict];
                       [objectsArray addObject:user];
                   }
                   
@@ -80,17 +80,38 @@
             
         }
     }];
+}
+
+-(void) getUserInfoWithID:(NSString*)uid
+                onSuccess:(void(^)(EMUser* user)) success
+                onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
     
-    /*
-    @"friends.get";
+    NSString *URLString = @"users.get";
+    NSDictionary *parameters = @{@"user_ids":uid,
+                                 @"fields":@[@"photo_100",@"status"],
+                                 @"name_case": @"nom"};
     
-    user_id
-    order name
-    count
-    offset
-    fields photo_50
-    name_case nom
-    */
+    [self.manager GET:URLString
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionTask *task, id responseObject) {
+                  
+                  NSArray* userArray = [responseObject objectForKey:@"response"];
+                  NSDictionary* userInfo = [userArray objectAtIndex:0];
+                  EMUser* user = [[EMUser alloc] initWithServerResponseUser:userInfo];
+                  
+                  if(success){
+                      success(user);
+                  }
+              }
+              failure:^(NSURLSessionTask *operation, NSError *error){
+                  
+                  if(failure){
+                      
+                      NSHTTPURLResponse* r = (NSHTTPURLResponse*)operation.response;
+                      failure(error, r.statusCode);
+                  }
+              }];
 }
 
 @end
