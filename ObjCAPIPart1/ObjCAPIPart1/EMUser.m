@@ -36,7 +36,15 @@
         self.lastName = [responseObject objectForKey:@"last_name"];
         self.ident = [responseObject objectForKey:@"uid"];
         
-            self.status = [responseObject objectForKey:@"status"];
+        self.status = [responseObject objectForKey:@"status"];
+        self.cityID = [responseObject objectForKey:@"city"];
+        NSInteger onl = [responseObject objectForKey:@"online"];
+        
+        if (onl == 1){
+            self.online = YES;
+        }else{
+            self.online = NO;
+        }
         
         NSString* URLString = [responseObject objectForKey:@"photo_100"];
         

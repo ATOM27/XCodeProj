@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "EMUser.h"
+@class EMUser;
+
 @interface EMServerManager : NSObject
 
 @property (strong,nonatomic) AFHTTPSessionManager *manager;
@@ -20,8 +21,11 @@
                    onSiccess:(void(^)(NSArray* friends)) success
                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
+-(void) getCityWithID:(NSString*) uid onSiccess:(void(^)(NSString* city)) success
+            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
 -(void) getUserInfoWithID:(NSString*)uid
-                onSuccess:(void(^)(EMUser* user)) success
+                onSuccess:(void(^)(EMUser *user)) success
                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 @end

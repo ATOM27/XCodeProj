@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EMServerManager.h"
+
 
 @interface EMUser : NSObject
 
@@ -15,6 +17,8 @@
 @property(strong, nonatomic) NSString* lastName;
 @property(strong, nonatomic) NSURL* imageURL;
 @property(strong, nonatomic, nullable) NSString* status;
+@property(assign, nonatomic) BOOL online;
+@property(strong, nonatomic, nullable) NSString* cityID;
 
 -(id) initWithServerResponseFriend:(NSDictionary*) responseObject;
 -(id) initWithServerResponseUser:(NSDictionary*) responseObject;

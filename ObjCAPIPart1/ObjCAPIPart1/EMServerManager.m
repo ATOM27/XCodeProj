@@ -88,7 +88,7 @@
     
     NSString *URLString = @"users.get";
     NSDictionary *parameters = @{@"user_ids":uid,
-                                 @"fields":@[@"photo_100",@"status"],
+                                 @"fields":@[@"photo_100",@"status",@"city",@"online"],
                                  @"name_case": @"nom"};
     
     [self.manager GET:URLString
@@ -114,4 +114,32 @@
               }];
 }
 
+-(void) getCityWithID:(NSString*) uid onSiccess:(void(^)(NSString* city)) success
+            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
+    
+    NSString *URLString = @"database.getCitiesById";
+    NSDictionary* paramethers = @{@"city_ids":@[uid]};
+    
+    [self.manager GET:URLString
+           parameters:paramethers
+             progress:nil
+              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                  
+                  NSArray* cityArray = [responseObject objectForKey:@"response"];
+                  NSDictionary* cityInfo = [cityArray objectAtIndex:0];
+                  NSString* city = [cityInfo objectForKey:@"name"];
+                  
+                  if(success){
+                      success(city);
+                  }
+                  
+              } failure:^(NSURLSessionTask *operation, NSError *error){
+                  
+                  if(failure){
+                      
+                      NSHTTPURLResponse* r = (NSHTTPURLResponse*)operation.response;
+                      failure(error, r.statusCode);
+                  }
+              }];
+}
 @end

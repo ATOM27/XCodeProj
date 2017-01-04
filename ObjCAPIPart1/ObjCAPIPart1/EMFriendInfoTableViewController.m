@@ -8,6 +8,7 @@
 
 #import "EMFriendInfoTableViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "EMServerManager.h"
 
 @interface EMFriendInfoTableViewController ()
 
@@ -26,6 +27,22 @@
     
     self.initialsLabel.text = [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName];
     self.statusLabel.text = self.user.status;
+    [self.statusLabel sizeToFit];
+    
+    if (self.user.online){
+        self.onlineLabel.text = @"Online";
+    }else{
+        self.onlineLabel.text = @"Offline";
+    }
+    
+    [[EMServerManager sharedManager] getCityWithID:user.cityID
+                                         onSiccess:^(NSString *city) {
+                                             self.cityLabel.text = city;
+                                             
+                                         } onFailure:^(NSError *error, NSInteger statusCode) {
+                                             NSLog(@"Error =%@ code = %ld",[error localizedDescription], (long)statusCode);
+                                         }];
+
     
     NSURLRequest* request = [NSURLRequest requestWithURL:self.user.imageURL];
     
@@ -42,6 +59,7 @@
 
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

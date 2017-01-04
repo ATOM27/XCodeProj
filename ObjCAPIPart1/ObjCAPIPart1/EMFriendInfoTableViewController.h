@@ -15,5 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *avatarImage;
 @property (strong, nonatomic) IBOutlet UILabel *initialsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onlineLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cityLabel;
 
 @end
