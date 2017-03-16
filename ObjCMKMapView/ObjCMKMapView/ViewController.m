@@ -201,7 +201,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState
    fromOldState:(MKAnnotationViewDragState)oldState{
-    
+    //not nessessary
     if (newState == MKAnnotationViewDragStateEnding){
         
         CLLocationCoordinate2D location = view.annotation.coordinate;

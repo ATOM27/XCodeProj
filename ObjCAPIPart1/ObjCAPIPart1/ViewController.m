@@ -29,7 +29,11 @@ static NSInteger friendsInRequest = 20;
     
     self.friendsArray = [[NSMutableArray alloc] init];
     
-    [self getFriendsFromServer];
+    //[self getFriendsFromServer];
+    
+    [[EMServerManager sharedManager] authorizedUser:^(EMUser *user) {
+        NSLog(@"TADA!");
+    }];
 }
 
 

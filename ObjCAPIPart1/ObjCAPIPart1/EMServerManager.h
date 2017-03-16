@@ -14,6 +14,9 @@
 
 @property (strong,nonatomic) AFHTTPSessionManager *manager;
 
+
+@property(strong, nonatomic, readonly) EMUser* currentUser;
+
 +(EMServerManager*) sharedManager;
 
 -(void) getFriendsWithOffset:(NSInteger) offset
@@ -28,4 +31,16 @@
                 onSuccess:(void(^)(EMUser *user)) success
                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
+-(void) authorizedUser:(void(^)(EMUser* user)) completion;
+
+-(void) getGroupWallWithGroupID:(NSString*) groupID
+                     withOffset:(NSInteger) offset
+                          count:(NSInteger) count
+                      onSiccess:(void(^)(NSArray* posts)) success
+                      onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+-(void)postText:(NSString*)string
+    onGroupWall:(NSString*) groupID
+      onSiccess:(void(^)(id result)) success
+      onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 @end

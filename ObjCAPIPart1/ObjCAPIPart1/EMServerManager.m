@@ -8,6 +8,15 @@
 
 #import "EMServerManager.h"
 #import "EMUser.h"
+#import "EMLoginViewController.h"
+#import "EMAccessToken.h"
+#import "EMPost.h"
+
+@interface EMServerManager ()
+
+@property (strong, nonatomic) EMAccessToken* accessToken;
+
+@end
 
 @implementation EMServerManager
 
@@ -126,7 +135,7 @@
               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                   
                   NSArray* cityArray = [responseObject objectForKey:@"response"];
-                  NSDictionary* cityInfo = [cityArray objectAtIndex:0];
+                  NSDictionary* cityInfo = [cityArray firstObject];
                   NSString* city = [cityInfo objectForKey:@"name"];
                   
                   if(success){
@@ -141,5 +150,111 @@
                       failure(error, r.statusCode);
                   }
               }];
+    
+    
 }
+
+-(void) authorizedUser:(void(^)(EMUser* user)) completion{
+    
+    EMLoginViewController* vc = [[EMLoginViewController alloc] initWithCompletionBlock:^(EMAccessToken *token) {
+        
+        self.accessToken = token;
+        
+        if (completion){
+            completion(nil );
+        }
+    }];
+    
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    UIViewController* mainVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    [mainVC presentViewController:nav animated:YES completion:nil];
+    
+}
+
+-(void) getGroupWallWithGroupID:(NSString*) groupID
+          withOffset:(NSInteger) offset
+               count:(NSInteger) count
+           onSiccess:(void(^)(NSArray* posts)) success
+           onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
+    
+    NSString *URLString = @"wall.get";
+    NSDictionary *parameters = @{@"owner_id": [NSString stringWithFormat:@"-%@", groupID],
+                                 @"count":@(count),
+                                 @"offset":@(offset),
+                                 @"filter":@"all"};
+    
+    [self.manager GET:URLString
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionTask *task, id responseObject) {
+                  // NSLog(@"JSON: %@", responseObject);
+                  
+                  NSArray* postsArray = [responseObject objectForKey:@"response"];
+                  
+                  if([postsArray count] > 1){
+                      postsArray = [postsArray subarrayWithRange:NSMakeRange(1, (int)[postsArray count] -1)];
+                  }else{
+                      postsArray = nil;
+                  }
+                  
+                  NSMutableArray* objectsArray = [NSMutableArray array];
+                  
+                  for (NSDictionary* dict in postsArray){
+                      
+                      EMPost* post = [[EMPost alloc] initWithServerResponse:dict];
+                      [objectsArray addObject:post];
+                  }
+                  
+                  
+                  if (success){ // if success block is send and it is OK than...
+                      success(objectsArray);
+                  }
+                  
+              } failure:^(NSURLSessionTask *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+                  
+                  if(failure){
+                      
+                      NSHTTPURLResponse* r = (NSHTTPURLResponse*)operation.response;
+                      failure(error, r.statusCode);
+                      
+                  }
+              }];
+}
+
+-(void)postText:(NSString*)text
+    onGroupWall:(NSString*) groupID
+      onSiccess:(void(^)(id result)) success
+      onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
+    
+    NSString *URLString = @"wall.post";
+    NSDictionary *parameters = @{@"owner_id": [NSString stringWithFormat:@"-%@", groupID],
+                                 @"message":text,
+                                 @"access_token":self.accessToken.token
+                                 };
+    
+    [self.manager POST:URLString
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionTask *task, id responseObject) {
+                  
+                  if (success){ // if success block is send and it is OK than...
+                      success(responseObject);
+                  }
+                  
+              } failure:^(NSURLSessionTask *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+                  
+                  if(failure){
+                      
+                      NSHTTPURLResponse* r = (NSHTTPURLResponse*)operation.response;
+                      failure(error, r.statusCode);
+                      
+                  }
+              }];
+
+}
+
 @end

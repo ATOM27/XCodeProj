@@ -15,6 +15,9 @@
 #import "AppDelegate.h"
 #import "EMStudent.h"
 
+typedef void(^TestBlockASD)(void);
+
+
 @interface AppDelegate ()
 
 @end

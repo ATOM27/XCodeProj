@@ -24,6 +24,11 @@
 		D62BA42A1E005940008AB487 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA41A1E005940008AB487 /* UIRefreshControl+AFNetworking.m */; };
 		D62BA42B1E005940008AB487 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA41C1E005940008AB487 /* UIWebView+AFNetworking.m */; };
 		D62BA42E1E005A15008AB487 /* EMServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D62BA42D1E005A15008AB487 /* EMServerManager.m */; };
+		D650996A1E79F2CE00176356 /* EMPost.m in Sources */ = {isa = PBXBuildFile; fileRef = D65099691E79F2CE00176356 /* EMPost.m */; };
+		D650996D1E79FA8D00176356 /* EMGroupWallViewCantroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D650996C1E79FA8D00176356 /* EMGroupWallViewCantroller.m */; };
+		D65099701E79FE3100176356 /* EMPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D650996F1E79FE3100176356 /* EMPostCell.m */; };
+		D667CC601E21B6D900F34B22 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D667CC5F1E21B6D900F34B22 /* EMLoginViewController.m */; };
+		D667CC631E21B73400F34B22 /* EMAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = D667CC621E21B73400F34B22 /* EMAccessToken.m */; };
 		D6B85B591E04BF7900DFA177 /* EMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B85B581E04BF7900DFA177 /* EMUser.m */; };
 		D6BBADCE1E00507400F5281B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BBADCD1E00507400F5281B /* main.m */; };
 		D6BBADD11E00507400F5281B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BBADD01E00507400F5281B /* AppDelegate.m */; };
@@ -91,6 +96,16 @@
 		D62BA41C1E005940008AB487 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		D62BA42C1E005A15008AB487 /* EMServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMServerManager.h; sourceTree = "<group>"; };
 		D62BA42D1E005A15008AB487 /* EMServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMServerManager.m; sourceTree = "<group>"; };
+		D65099681E79F2CE00176356 /* EMPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMPost.h; sourceTree = "<group>"; };
+		D65099691E79F2CE00176356 /* EMPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMPost.m; sourceTree = "<group>"; };
+		D650996B1E79FA8D00176356 /* EMGroupWallViewCantroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGroupWallViewCantroller.h; sourceTree = "<group>"; };
+		D650996C1E79FA8D00176356 /* EMGroupWallViewCantroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGroupWallViewCantroller.m; sourceTree = "<group>"; };
+		D650996E1E79FE3100176356 /* EMPostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMPostCell.h; sourceTree = "<group>"; };
+		D650996F1E79FE3100176356 /* EMPostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMPostCell.m; sourceTree = "<group>"; };
+		D667CC5E1E21B6D900F34B22 /* EMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMLoginViewController.h; sourceTree = "<group>"; };
+		D667CC5F1E21B6D900F34B22 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
+		D667CC611E21B73400F34B22 /* EMAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAccessToken.h; sourceTree = "<group>"; };
+		D667CC621E21B73400F34B22 /* EMAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAccessToken.m; sourceTree = "<group>"; };
 		D6B85B571E04BF7900DFA177 /* EMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMUser.h; sourceTree = "<group>"; };
 		D6B85B581E04BF7900DFA177 /* EMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMUser.m; sourceTree = "<group>"; };
 		D6BBADC91E00507400F5281B /* ObjCAPIPart1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCAPIPart1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,11 +208,30 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		D65099711E79FF0600176356 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D65099721E79FF1300176356 /* Post */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		D65099721E79FF1300176356 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				D650996E1E79FE3100176356 /* EMPostCell.h */,
+				D650996F1E79FE3100176356 /* EMPostCell.m */,
+			);
+			name = Post;
+			sourceTree = "<group>";
+		};
 		D6B85B5A1E04C18E00DFA177 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				D6B85B571E04BF7900DFA177 /* EMUser.h */,
 				D6B85B581E04BF7900DFA177 /* EMUser.m */,
+				D65099681E79F2CE00176356 /* EMPost.h */,
+				D65099691E79F2CE00176356 /* EMPost.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -231,8 +265,15 @@
 				D6BBADD01E00507400F5281B /* AppDelegate.m */,
 				D6BBADD21E00507400F5281B /* ViewController.h */,
 				D6BBADD31E00507400F5281B /* ViewController.m */,
+				D650996B1E79FA8D00176356 /* EMGroupWallViewCantroller.h */,
+				D650996C1E79FA8D00176356 /* EMGroupWallViewCantroller.m */,
+				D65099711E79FF0600176356 /* Cells */,
 				D60F11CE1E05FF5500A6072D /* EMFriendInfoTableViewController.h */,
 				D60F11CF1E05FF5500A6072D /* EMFriendInfoTableViewController.m */,
+				D667CC611E21B73400F34B22 /* EMAccessToken.h */,
+				D667CC621E21B73400F34B22 /* EMAccessToken.m */,
+				D667CC5E1E21B6D900F34B22 /* EMLoginViewController.h */,
+				D667CC5F1E21B6D900F34B22 /* EMLoginViewController.m */,
 				D62BA42C1E005A15008AB487 /* EMServerManager.h */,
 				D62BA42D1E005A15008AB487 /* EMServerManager.m */,
 				D6BBADD51E00507400F5281B /* Main.storyboard */,
@@ -412,11 +453,14 @@
 				D62BA41D1E005940008AB487 /* AFHTTPSessionManager.m in Sources */,
 				D62BA4221E005940008AB487 /* AFURLSessionManager.m in Sources */,
 				D62BA4261E005940008AB487 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				D65099701E79FE3100176356 /* EMPostCell.m in Sources */,
 				D6BBADD11E00507400F5281B /* AppDelegate.m in Sources */,
+				D667CC601E21B6D900F34B22 /* EMLoginViewController.m in Sources */,
 				D62BA4291E005940008AB487 /* UIProgressView+AFNetworking.m in Sources */,
 				D6B85B591E04BF7900DFA177 /* EMUser.m in Sources */,
 				D62BA41E1E005940008AB487 /* AFNetworkReachabilityManager.m in Sources */,
 				D6BBADCE1E00507400F5281B /* main.m in Sources */,
+				D650996A1E79F2CE00176356 /* EMPost.m in Sources */,
 				D62BA4251E005940008AB487 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				D62BA4281E005940008AB487 /* UIImageView+AFNetworking.m in Sources */,
 				D62BA4271E005940008AB487 /* UIButton+AFNetworking.m in Sources */,
@@ -426,6 +470,8 @@
 				D62BA4201E005940008AB487 /* AFURLRequestSerialization.m in Sources */,
 				D62BA4231E005940008AB487 /* AFAutoPurgingImageCache.m in Sources */,
 				D62BA4241E005940008AB487 /* AFImageDownloader.m in Sources */,
+				D650996D1E79FA8D00176356 /* EMGroupWallViewCantroller.m in Sources */,
+				D667CC631E21B73400F34B22 /* EMAccessToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
